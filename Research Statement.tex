@@ -9,14 +9,7 @@
 %        \it #1\par}}
 %\newcommand{\ville}[1]{\authornote{NOTE TO SELF: #1}}
 
-\marginparwidth=1cm
-\marginparsep=5pt
-\newcommand\ville[1]{%
-    \mymarginpar{\raggedright\hbadness=10000\tiny\it #1\par}}
-
-
 \usepackage{enumerate}% http://ctan.org/pkg/enumerate
-\usepackage{amsmath} 
 %\usepackage{times}
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{fancyhdr}
@@ -28,7 +21,7 @@
 \usepackage[boxed, section]{algorithm}
 %\usepackage{algorithm}
 \usepackage{algorithmic}
-\usepackage{cite}
+%\usepackage{cite}
 \usepackage{multirow} 
 \usepackage{rotating}
 \usepackage{geometry}
@@ -37,6 +30,12 @@
 \usepackage{natbib}
 \usepackage{titlesec}
 \usepackage{lipsum}
+\usepackage{xstring}
+
+\marginparwidth=1cm
+\marginparsep=5pt
+\newcommand\ville[1]{%
+    \mymarginpar{\raggedright\hbadness=10000\tiny\it #1\par}}
 
 
 
@@ -186,10 +185,12 @@ THE WHARTON SCHOOL OF THE UNIVERSITY OF PENNSYLVANIA
 %In general I consider myself an applied statistician who enjoys cross-disciplinary collaboration and research problems with strong motivation in  interesting and relevant real-world data. 
 For the past three years I have worked on two research projects that are not only topically very different but also have disjoint sets of collaborators. Both projects are highly interdisciplinary, involve much collaboration with subject-matter experts, and investigate research problems with strong motivation in  interesting and relevant real-world data. These projects are described in the following sections, starting with my doctoral work.
 
+%Generally interesting in forecasting. and always looking for new collaborations. insights in forecasting. active sampling to boost predictive performance. 
+
  \vspace{-0.2em}
 \section{Modeling, Aggregating, and Improving Predictions}  \vspace{-0.2em}
 %\subsection*{Motivation} \vspace{-0.2em}
-Past literature has distinguished two types of polling: prediction and opinion polling. In broad terms, an opinion poll is a survey of public opinion, whereas a prediction poll involves multiple agents collectively predicting the value of some quantity of interest \citep{goel2010prediction, mellers2014psychological}. 
+Past literature has distinguished two types of polling: prediction and opinion polling. In broad terms, an opinion poll is a survey of public opinion, whereas a prediction poll involves multiple agents collectively predicting the value of some quantity of interest \citep{goel2010prediction}. 
 For instance, consider a presidential election poll. An opinion poll typically asks the voters who they will vote for. A prediction poll, on the other hand, could ask which candidate they think will win. A liberal voter in a dominantly conservative country is likely to answer differently to these two questions. 
 %%In broader terms, 
 %% Prediction polling is, of course, not limited to probability forecasts but can be applied to others types, such as point estimates or even probability density functions, as well. 
@@ -203,7 +204,7 @@ This has given rise to crowdsourcing platforms, such as MTurk and Witkey, and ma
 Because of this rapidly growing popularity, there is an urgent need for methodology and tools for analyzing prediction polls. 
 %For instance,
 %For three years I have collaborated with one such group, called 
-This was the central motivation for forming a government funded research group, called the Good Judgment Project (GJP) (\citealt{ungar2012good, mellers2014psychological}). Throughout my doctoral studies, I have worked with the GJP to improve prediction of international political future events deemed important by the Intelligence Advanced Research Projects Activity (IARPA). 
+This was the central motivation for forming a government funded research group, called the Good Judgment Project (GJP) (\citealt{ungar2012good}). Throughout my doctoral studies, I have worked with the GJP to improve prediction of international political future events deemed important by the Intelligence Advanced Research Projects Activity (IARPA). 
 %The group was highly interdisciplinary, involving members from many disciplines such as psychology, political science, computer science, marketing, and others. 
 During its four years of operation, the GJP recruited thousands of forecasters who gave hundreds of thousands of probability estimates about hundreds of events. This formed a large forecasting database that serves as an ideal platform for testing hypotheses and developing new methodology. 
 %This led to a significant number of publications in research journals and also repeated mentions in media such as The Economist, the New York Times, and the Washington Post.  
@@ -216,8 +217,7 @@ predictions into a single consensus that represents all the forecasters' advice.
 %The policy-makers, however, can choose to aggregate the forecasts in many different ways.
 % The final choice of the combination rule, however, is crucial because it often decides how much of the forecasters' total information is incorporated and hence how well the consensus performs in terms of predictive accuracy.
 %The main methodological challenge that the GJP faced was to decide how to combine the predictions into a single consensus prediction.
- This problem, known as the \textit{aggregation problem}, has historically troubled researchers in many fields, including economics \citep{blix2001good},  weather forecasting \citep{raftery2005using}, political science \citep{graefea2014combining}, and others. 
- 
+% This problem, known as the \textit{aggregation problem}, has historically troubled researchers in many fields, including economics \citep{blix2001good},  weather forecasting \citep{raftery2005using}, political science \citep{graefea2014combining}, and others. 
  In general, principled aggregation begins with an assumption about the source of heterogeneity among the predictions.
 In particular, it is necessary to specify how the forecasts differ from the true value of the target quantity.
  For the past several decades, potentially due to the early forms of data collection, \textit{measurement error} has been considered as the main source of heterogeneity. This approach has become the standard and is often applied in practice even when data variation is dominated  by causes besides error in measurement. For instance, assuming measurement error may be reasonable in modeling repeated estimates from a single instrument. However, it is unlikely to hold in prediction polling, where the estimates arise from multiple, often widely different sources. At best, this forces us to imagine that
@@ -225,7 +225,7 @@ the forecasters are all in principle trying to apply the same
 procedures to the same data but are making numerous small mistakes.
 % -- overall a rather implausible assumption. 
 
-Assuming measurement error in prediction polls is not only intuitively implausible but 
+Assuming measurement error in prediction polls is not only intuitively implausible but also
 %Furthermore, our work shows both theoretically and empirically how assuming measurement error 
 leads to biased aggregation. First, \cite{satopaa2015combining}  prove that any weighted average of univariate forecasts that are consistent with different sets of information about the target quantity is necessarily under confident and hence sub-optimal. They also explain why similar problems are likely to arise for other measures of central tendency. 
 %Our work shows that relying on measurement error leads to biased aggregation.
@@ -240,12 +240,14 @@ Second, \cite{satopaa, satopaa2014probability} find that
 %In prediction polling a central challenge is aggregate the predictions into a single consensus that reflects as much of the forecasters' information as possible. A simple option is to consider the average, median, or some other measure of central tendency. Strikingly, however, early empirical studies conducted by the GJP suggested that 
 %Such simple aggregators of probability forecasts
 %In particular,
-simple measurement-error-based aggregates of probability forecasts, such as the average or the median, can be improved dramatically by \textit{extremizing}, that is, by shifting them systematically closer to their nearer extreme (at zero or one). These and many other studies on extremization (see, e.g., \citealt{Ranjan08, Erev1994,
-shlomi2010subjective, karmarkar1978subjectively, mellers2014psychological})  represent the unwieldy position of the
+simple measurement-error-based aggregates of probability forecasts, such as the average or the median, can be improved dramatically by \textit{extremizing}, that is, by shifting them systematically closer to their nearer extreme (at zero or one). This  reflects
+%and many other studies on extremization (see, e.g., \citealt{Ranjan08, Erev1994,
+%shlomi2010subjective, karmarkar1978subjectively, mellers2014psychological})  represent 
+the unwieldy position of the
  current state-of-the-art aggregators: they first compute an average 
  based on a model that is
-likely to be at odds with the actual process of probability
-forecasting, and  then aim to correct the induced bias  via {\em ad hoc}
+likely to be at odds with the actual process of
+prediction polling, and  then aim to correct the induced bias  via {\em ad hoc}
 extremizing techniques.
 %
 
@@ -269,12 +271,16 @@ This forms the basis of a novel modeling framework, called the \textit{partial i
 %Even though these aggregators outperform other techniques in practice, they fail to explain the cause of the bias that extremization aims to correct. This bias turns out to be fundamentally linked with the 
 
  \vspace{-0.2em} \subsection{Partial Information Framework} \vspace{-0.2em}
-Forecast aggregation literature by and large agrees that the goal is to collect and combine  information from different forecasters (see, e.g., \citealt{forlines2012heuristics, armstrong2, dawid1995coherent}). In fact, \cite{satopaamodeling} provide simple examples showing that optimal aggregation is not well-defined without assumptions on the information structure among the forecasters. To illustrate, consider two forecasters whose information sets are shown in Figure \ref{InfoStr}. In this diagram full information is represented by the unit interval. Forecaster 1 knows $U \cup M$ while forecaster 2 knows $M \cup V$. Therefore nobody knows information in $W$. Unfortunately, averaging aggregators assume that all forecasters use the same information and hence never appear more informed than the most informed individual forecaster \citep{satopaa2015combining}. This dramatically under-estimates the group's information, namely $U \cup M \cup V$, and consequently leads to an under confident aggregate. The partial information framework, on the other hand, assumes partially overlapping information sets and aims to incorporate all of the forecasters' information in the resulting aggregate.
+Forecast aggregation literature by and large agrees that the goal is to collect and combine  information from different forecasters (see, e.g., \citealt{armstrong2})
+% (see, e.g., \citealt{forlines2012heuristics, armstrong2, dawid1995coherent})
+In fact, \cite{satopaamodeling} provide simple examples showing that optimal aggregation is not well-defined without assumptions on the information structure among the forecasters. To illustrate, consider two forecasters whose information sets are shown in Figure \ref{InfoStr}. In this diagram full information is represented by the unit interval. Forecaster 1 knows $U \cup M$ while forecaster 2 knows $M \cup V$. Ideally, an aggregator would utilize the forecasters' combined information, namely $U \cup M \cup V$.
+%Therefore nobody knows information in $W$. 
+Unfortunately, averaging aggregators do not behave like information aggregators. They assume that all forecasters use the same information and hence never appear more informed than the most informed individual forecaster \citep{satopaa2015combining}. This dramatically under-estimates the amount of combined information, leading to an under confident aggregate.  On the other hand, by assuming partially overlapping information sets, the partial information framework can estimate an aggregate that reflects all of the forecasters' information.
 
 \begin{figure}[t!]
    \centering
    \includegraphics[width = \textwidth]{N=2.png} % requires the graphicx package
-  \caption{Illustration of Information Distribution among Two Forecasters. The bars leveled horizontally with Forecaster $j$ represent the $j$th forecaster's information set.}
+  \caption{Illustration of Information Distribution among Two Forecasters. The unit interval represents all possible information that can be known about $Y$. The bar leveled horizontally with Forecaster $j$ represent the $j$th forecaster's information set.}
      \label{InfoStr}
 \end{figure}
 
@@ -282,7 +288,7 @@ Forecast aggregation literature by and large agrees that the goal is to collect 
 To make this specific, consider $N$ forecasters and suppose forecaster $j$ predicts $X_j$ for some (random) quantity of interest $Y$. The partial information framework assumes that the observables $Y$ and $X_j$ are measurable random variables under some common probability space $(\Omega, \F , \P)$. 
 The principal $\sigma$-field $\F$ can be interpreted as all the possible information that can be known about $Y$. 
 %Under the partial information framework, the forecasters operate under the same probability model but use different subsets of the full information. In fact, i
-In any Bayesian setup, it is more or less tautological that
+In any Bayesian setup, with quadratic loss or some other loss function minimized by the conditional expectation of $Y$, it is more or less tautological that
 %More specifically,
 forecaster $j$ predicts $X_j = \E(Y \| \F_j)$ based on some partial information set $\F_j \subseteq \F$. Therefore $\F_i \neq \F_j$ if $X_i \neq X_j$, and forecast heterogeneity stems purely from information diversity.  
 % Note, however, that if forecaster $j$ uses a simple rule, $\F_j$ may not be the full $\sigma$-field of information available to the forecaster but rather a smaller $\sigma$-field corresponding to the information used by the rule. Furthermore, if two forecasters have access to the same $\sigma$-field, they may decide to use different sub-$\sigma$-fields, leading to different predictions. 
@@ -295,7 +301,7 @@ forecaster $j$ predicts $X_j = \E(Y \| \F_j)$ based on some partial information 
 %%assumptions on the information structure among the forecasters.
 %The covariance structure (\ref{cov_str}) provides leverage for regressing $Y$ on the $X_j$'s without a separate training set of past predictions and known outcomes. The resulting estimator,
 %The main objective of the framework is to aggregate the forecasters' information into a consensus prediction. 
-In practice, however, all the forecasters' information is not available to the aggregator. Instead, the forecasters typically reflect their information only through the predictions. Therefore the relevant aggregator under each specific instance of the framework is the \textit{revealed} aggregator $X'' := \E (Y \|
+In practice, however, all details of the forecasters' information are not available to the aggregator. Instead, the forecasters typically reflect their information only through the predictions. Therefore the relevant aggregator under each specific instance of the framework is the \textit{revealed} aggregator $X'' := \E (Y \|
 \F'')$, where $\F'' := \sigma(X_1, \dots, X_N)$ is the $\sigma$-field generated (or revealed) by the
 $X_j$'s. 
 % If $\E(Y^2) < \infty$, then among all variables measurable with respect to $\F''$, the revealed aggregator minimizes the expected quadratic loss and therefore provides a reasonable upper bound on aggregation efficiency. \cite{satopaa2015combining} show that $X''$ never reduces to a non-trivial weighted average of the forecasts, suggesting that information diversity, as a source of forecast heterogeneity, is fundamentally different from measurement error. 
@@ -347,30 +353,57 @@ $X_j$'s.
 
 
 
-The framework, as introduced above, is clearly too abstract to be applied in practice. For one, due to the inability of the forecasters to identify clearly the basis to their predictions, the details of the information sets can almost always be rendered unattainable. Fortunately, it is possible to deduce the amount of information used by a forecaster.  \cite{satopaa2015partial} show that, without any further assumptions, the covariance matrix $\bSigma_X$ of the $X_j$'s extends to the unknown $Y$ as follows:
+
+%For one, due to the inability of the forecasters to identify clearly the basis to their predictions, the details of the information sets can almost always be rendered unattainable.
+%The first and most important step is to separate out those details of the information set that matter for aggregation and can be estimated in practice. 
+%To guide estimation, 
+The key to applying this framework in practice is to observe that 
+  variance naturally quantifies information \citep{satopaa2015partial}. To illustrate, consider a group of forecasters making probability estimates for a binary event. First, forecasters with no or very little information are likely to report an estimate close to $0.5$, a.k.a., the non-informative estimate. On the other hand, highly informed forecasters are likely to make predictions closer to the extremes at zero and one. Thus, more information leads to higher variance in the predictions. Second, two forecasters with high information overlap tend to report similar predictions and hence present higher covariance. More formally this all means that  $\Var(Y)$ represents the maximum amount of information that can be known about $Y$, $\Var(X_j)$ is the amount of that information used by forecaster $j$, and 
+%and $\Var(X_j)$ quantify the amount of information in $\F$ and $\F_j$, respectively.  
+%represents the total amount of information and $\Var(X_j)$ is the amount of information used by forecaster $j$. 
+ $\Cov (X_{i} , X_{j})$ can be interpreted as the amount of information overlap between forecasters $i$ and $j$. For example, in Figure \ref{InfoStr},
+ \begin{align*}
+ \Var(Y) &= 1.0, &&& \Var(X_1) = |U \cup M| &= 0.6,\\
+ \Var(X_2) = |M \cup V| &= 0.5, &&& \Cov(X_1, X_2) = |M| &= 0.25.
+ \end{align*}
+This leads to two interesting observations. First, under the partial information framework, increased variance suggests more information and is generally deemed helpful. This stands in clear contrast with standard statistical models that often regard higher variance as increased noise. Second, if $\X = (X_1, \dots, X_N)'$ collects all forecasts, the covariance matrix of the model variables $Y, X_1, \dots, X_N$ must respect the following pattern:
+% In particular, \cite{satopaa2015partial} 
+%explain that in practice variance can be used to quantify information and
+% Fortunately, it is possible to deduce the amount of information used by a forecaster.  \cite{satopaa2015partial} 
+% show that, without any further assumptions, the covariance matrix $\bSigma_X$ of the $X_j$'s extends to the unknown $Y$ as follows:
 \begin{align}
-\Cov\left((Y, X_1, \dots, X_N)'\right) &=  \left( \begin{matrix} 
+\bSigma = \Cov\left((Y, X_1, \dots, X_N)'\right) &=  \left( \begin{matrix} 
  \Var(Y)  & \diag(\bSigma_X)'  \\
 \diag(\bSigma_X) & \bSigma_X \\
 \end{matrix} \right), \label{cov_str}
 \end{align}
-where $\diag(\bSigma_X)$ denotes the diagonal of $\bSigma_X$. They explain that this covariance matrix describes how information is distributed among the forecasters. In particular, $\Var(Y)$ is the maximum amount of information that can be known about $Y$, $\Var(X_j)$ is the amount of information used by forecaster $j$, and 
-%and $\Var(X_j)$ quantify the amount of information in $\F$ and $\F_j$, respectively.  
-%represents the total amount of information and $\Var(X_j)$ is the amount of information used by forecaster $j$. 
- $\Cov (X_{i} , X_{j})$ can be interpreted as the amount of information overlap between forecasters $i$ and $j$.  For example, in Figure \ref{InfoStr},
- \begin{align*}
- \Var(Y) &= 1.0, &&& \Var(X_1) = |U \cup M| &= 0.6,\\
- \Var(X_2) = |M \cup V| &= 0.4, &&& \Cov(X_1, X_2) = |M| &= 0.15.
- \end{align*}
- Therefore increased variance suggests more information and is generally deemed helpful. This stands in clear contrast with standard statistical models that often regard higher variance as increased noise.  Why does this work? First, note that a fully informed forecaster predicts  $X_j = Y$ while a forecaster with no information predicts the prior mean $X_j = \E(Y) = \E(Y|\F_0)$, where $\F_0 = \{\emptyset, \Omega\}$ is the trivial $\sigma$-field. Therefore as the forecaster becomes more informed, $\F_j$ grows from $\F_0$ to $\F$ and, consequently, $\Var(X_j)$ increases from $0$ to $\Var(Y)$. Second, two forecasters with high information overlap are likely to report very similar predictions and hence present higher covariance.
+where $\bSigma_X = \Cov(\X)$ and $\diag(\bSigma_X)$ denotes the diagonal of $\bSigma_X$. This places specific constraints on the covariance among the forecasts. In particular, the matrix $\bSigma$ is positive semi-definite if and only if
+% Intuitively, 
+%for any given $X_1, \dots, X_N$, the corresponding $\bSigma$ satisfies $h(\bSigma) \in \mathcal{S}_{+}^{N+1}$ if there exists some random variable $Y$ such that all $X_1, \dots, X_N$ are conditionally unbiased for $Y$. In other words, $X_1, \dots, X_N$ must be jointly conditionally unbiased for some $Y$. 
+all the forecasts $X_j$ are consistent with some (possibly different) sets of information about a common $Y$. \cite{satopaa2015partial} discuss estimation under this constraint. 
+%, then the corresponding $\bSigma$ satisfies $h(\bSigma) \in \mathcal{S}_{+}^{N+1}$. 
 
-If the partial information framework is to ever become common practice in forecast aggregation, a close yet practical specification within the framework must be introduced. This requires one additional assumption, namely the choice of a joint distribution for the model variables $Y, X_1, \dots, X_N$.
+
+% This covariance matrix summarizes information among the forecasters. In particular, $\Var(Y)$ is the maximum amount of information that can be known about $Y$, $\Var(X_j)$ is the amount of information used by forecaster $j$, and 
+%%and $\Var(X_j)$ quantify the amount of information in $\F$ and $\F_j$, respectively.  
+%%represents the total amount of information and $\Var(X_j)$ is the amount of information used by forecaster $j$. 
+% $\Cov (X_{i} , X_{j})$ can be interpreted as the amount of information overlap between forecasters $i$ and $j$.  For example, in Figure \ref{InfoStr},
+% \begin{align*}
+% \Var(Y) &= 1.0, &&& \Var(X_1) = |U \cup M| &= 0.6,\\
+% \Var(X_2) = |M \cup V| &= 0.4, &&& \Cov(X_1, X_2) = |M| &= 0.15.
+% \end{align*}
+% Therefore increased variance suggests more information and is generally deemed helpful. This stands in clear contrast with standard statistical models that often regard higher variance as increased noise. 
+%  Why does this work? Consider a forecaster making a probability estimate.  First, note that a fully informed forecaster predicts  $X_j = Y$ while a forecaster with no information predicts the prior mean $X_j = \E(Y) = \E(Y|\F_0)$, where $\F_0 = \{\emptyset, \Omega\}$ is the trivial $\sigma$-field. Therefore as the forecaster becomes more informed, $\F_j$ grows from $\F_0$ to $\F$ and, consequently, $\Var(X_j)$ increases from $0$ to $\Var(Y)$. Second, two forecasters with high information overlap are likely to report very similar predictions and hence present higher covariance.
+
+%% SPECIFICATION 
+
+The framework, as introduced above, is intuitively appealing yet clearly too abstract to be applied in practice.  If the partial information framework is to ever become common practice in forecast aggregation, a close yet practical specification within the framework must be introduced and made accessible to practitioners. Fortunately, this only requires one additional assumption, namely the choice of a joint distribution for the model variables $Y, X_1, \dots, X_N$. Different choices lead to different partial information models. 
 % In order to construct a more specific model within the framework, a joint distribution for the model variables $Y, X_1, \dots, X_N$ must be specified.
   \cite{satopaa2015partial} provide both intuitive and technical motivations for using the multivariate Gaussian distribution with the covariance structure (\ref{cov_str}). 
-%  The resulting model, known as the \textit{Gaussian partial information model}, turns out extremely successful. 
+%  The resulting model, named the \textit{Gaussian partial information model}, has been extremely successful. 
 %  First, \cite{satopaamodeling} use it to provide intuition on when and how much the average forecast should be extremized. Second, \cite{satopaa2015partial} estimate $\bSigma_X$ for forecasters addressing more than one related problems and
 %  
-They apply the resulting model, known as the \textit{Gaussian partial information model}, to real-world prediction polls, involving both probability and real-valued forecasts. In both cases, the revealed aggregator achieves a noticeable performance improvement over the common measurement-error-based aggregators, suggesting that  information diversity is the more important  source of forecast heterogeneity. 
+They apply the resulting model, named the \textit{Gaussian partial information model}, to real-world prediction polls, involving both probability and real-valued forecasts. In both cases, the model is extremely successful. In particular, the revealed aggregator achieves large performance improvements over the common measurement-error-based aggregators, suggesting that  information diversity is the more important  source of forecast heterogeneity. 
 
 
 %Intuitively, this choice can be motivated by a pool of $M$ information particles. Each particle, which can be interpreted as representing a piece of information, has either a positive or negative effect on $Y$. The total sum (integral) of these particles determines the final value of $Y$. Each forecaster, however, observes only the sum of some subset of the particles. Based on this sum, the forecaster makes an estimate of $Y$. 
@@ -548,8 +581,26 @@ For instance, similar modeling mistakes have been made in rankings of liver tran
 \end{enumerate}
 
 
-%\bibliographystyle{plain}
-\bibliographystyle{apalike}
+%\bibliographystyle{myplain.bst}
+\bibliographystyle{myapalike.bst}
+
+%\def\FormatName#1{%
+%  \def\myname{{Satop\"a\"a}, V.}%
+%%  \def\myname{Silber, J. H.}%
+%%  \def\myname{Ungar, L.}%
+%  \edef\name{#1}%
+%  \ifx\name\myname
+%    \textbf{#1}%
+%  \else
+%    #1%
+%  \fi
+%}
+
+\def\FormatName#1{%
+  \IfSubStr{#1}{Satop}{\textbf{#1}}{#1}%
+}
+
+
 \bibliography{biblio}		% expects file "myrefs.bib"
 
 
