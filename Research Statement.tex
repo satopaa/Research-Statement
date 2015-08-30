@@ -185,7 +185,6 @@ THE WHARTON SCHOOL OF THE UNIVERSITY OF PENNSYLVANIA
 %In general I consider myself an applied statistician who enjoys cross-disciplinary collaboration and research problems with strong motivation in  interesting and relevant real-world data. 
 For the past three years I have worked on two research projects that are not only topically very different but also have disjoint sets of collaborators. Both projects are highly interdisciplinary, involve much collaboration with subject-matter experts, and investigate research problems with strong motivation in  interesting and relevant real-world data. These projects are described in the following sections, starting with my doctoral work.
 
-%Generally interesting in forecasting. and always looking for new collaborations. insights in forecasting. active sampling to boost predictive performance. 
 
  \vspace{-0.2em}
 \section{Modeling, Aggregating, and Improving Predictions}  \vspace{-0.2em}
@@ -358,7 +357,7 @@ $X_j$'s.
 %The first and most important step is to separate out those details of the information set that matter for aggregation and can be estimated in practice. 
 %To guide estimation, 
 The key to applying this framework in practice is to observe that 
-  variance naturally quantifies information \citep{satopaa2015partial}. To illustrate, consider a group of forecasters making probability estimates for a binary event. First, forecasters with no or very little information are likely to report an estimate close to $0.5$, a.k.a., the non-informative estimate. On the other hand, highly informed forecasters are likely to make predictions closer to the extremes at zero and one. Thus, more information leads to higher variance in the predictions. Second, two forecasters with high information overlap tend to report similar predictions and hence present higher covariance. More formally this all means that  $\Var(Y)$ represents the maximum amount of information that can be known about $Y$, $\Var(X_j)$ is the amount of that information used by forecaster $j$, and 
+  variance naturally quantifies information \citep{satopaa2015partial}. To illustrate, consider a group of forecasters making probability estimates for a binary event. First, forecasters with no or very little information are likely to report probabilities close to $0.5$, a.k.a., the non-informative estimate. On the other hand, highly informed forecasters are likely to make predictions closer to the extremes at zero and one. Thus, more information leads to higher variance in the predictions. Second, two forecasters with high information overlap tend to report similar predictions and hence present higher covariance. More formally this all means that  $\Var(Y)$ represents the maximum amount of information that can be known about $Y$, $\Var(X_j)$ is the amount of that information used by forecaster $j$, and 
 %and $\Var(X_j)$ quantify the amount of information in $\F$ and $\F_j$, respectively.  
 %represents the total amount of information and $\Var(X_j)$ is the amount of information used by forecaster $j$. 
  $\Cov (X_{i} , X_{j})$ can be interpreted as the amount of information overlap between forecasters $i$ and $j$. For example, in Figure \ref{InfoStr},
@@ -377,11 +376,14 @@ This leads to two interesting observations. First, under the partial information
 \diag(\bSigma_X) & \bSigma_X \\
 \end{matrix} \right), \label{cov_str}
 \end{align}
-where $\bSigma_X = \Cov(\X)$ and $\diag(\bSigma_X)$ denotes the diagonal of $\bSigma_X$. This places specific constraints on the covariance among the forecasts. In particular, the matrix $\bSigma$ is positive semi-definite if and only if
+where $\bSigma_X = \Cov(\X)$ and $\diag(\bSigma_X)$ denotes the diagonal of $\bSigma_X$. The fact that $\bSigma$ must be positive semidefinite places specific constraints on $\bSigma_X$. 
+%In particular, the matrix $\bSigma$ is positive semi-definite if and only if
 % Intuitively, 
 %for any given $X_1, \dots, X_N$, the corresponding $\bSigma$ satisfies $h(\bSigma) \in \mathcal{S}_{+}^{N+1}$ if there exists some random variable $Y$ such that all $X_1, \dots, X_N$ are conditionally unbiased for $Y$. In other words, $X_1, \dots, X_N$ must be jointly conditionally unbiased for some $Y$. 
-all the forecasts $X_j$ are consistent with some (possibly different) sets of information about a common $Y$. \cite{satopaa2015partial} discuss estimation under this constraint. 
+Intuitively, $\bSigma_X$ satisfies these constraints if all the forecasts $X_j$ are simultaneously consistent with (possibly different) sets of information about some common yet unknown $Y$. \cite{satopaa2015partial} discuss  covariance matrix estimation under this constraint. 
 %, then the corresponding $\bSigma$ satisfies $h(\bSigma) \in \mathcal{S}_{+}^{N+1}$. 
+
+%\marginpar{this is not correct; the constraint is on sigmaX, there must exist some Y such that blaah blaah}
 
 
 % This covariance matrix summarizes information among the forecasters. In particular, $\Var(Y)$ is the maximum amount of information that can be known about $Y$, $\Var(X_j)$ is the amount of information used by forecaster $j$, and 
@@ -450,7 +452,7 @@ Given the fundamental nature of this innovation, the partial information framewo
  Developing a partial information aggregator that has a simple form with no dependency on parameters is certainly a future research direction with potential for high impact. 
 %The first step is to develop an aggregator that is both marginally consistent and expanding. Finding an aggregator that maintains forecasters' reliability seems more difficult. 
 
-\item A promising empirical direction is the Bayesian approach. These techniques have been found superior to the likelihood-based alternatives in many applications with small or moderately sized datasets. Therefore, given that the number of forecasts in a prediction poll is typically quite small, a Bayesian approach is likely to improve the quality of the final aggregate. This would involve  developing a prior distribution for $\bSigma_{X}$ -- a problem that seems interesting in itself because the structure (\ref{cov_str}) poses known constraints on $\bSigma_{X}$ \citep{satopaa2015partial}.  
+\item A promising empirical direction is the Bayesian approach. These techniques have been found superior to the likelihood-based alternatives in many applications with small or moderately sized datasets. Therefore, given that the number of forecasts in a prediction poll is typically quite small, a Bayesian approach is likely to improve the quality of the final aggregate. This would involve  developing a prior distribution for $\bSigma_{X}$ -- a problem that seems interesting in itself because of the constraints that  (\ref{cov_str}) places on $\bSigma_{X}$ \citep{satopaa2015partial}.  
 
 \item Most probability aggregation procedures use one probability estimate per forecaster, even though it is common for experts studying real problems to update their probability estimates over time. \cite{satopaa2014probability} advance into unexplored areas of probability aggregation by considering a dynamic context in which experts can update their beliefs at random intervals. Overall, this paper was very well received. The aggregator therein, however, is based on measurement error. Therefore, an interesting future project would be to utilize martingale theory and develop a time-series aggregator based on partial information. 
 
@@ -559,27 +561,37 @@ Our AMI mortality data, which are a very careful imitation of Medicare's data an
 
 
  \vspace{-1em} \subsection{Future Research} \vspace{-0.2em}
-The largely unprincipled modeling practice in public reporting offers many research opportunities. Even though our work corrects some of these aspects and lays down foundations upon which more principled public reporting can be developed, much work remains to be done. The following enumeration provides some future direction. 
+The largely unprincipled modeling practice in public reporting offers many research opportunities. For instance, we have observed similar modeling mistakes in rankings of liver transplantation centers.  Even though our work corrects some of these aspects and lays down foundations upon which more principled public reporting can be developed, much work remains to be done. First, our goal is to repeat our study of AMI on heart failure and pneumonia for which we already have data that closely imitate that of Medicare's. 
+% In particular, 
+%The following enumeration provides some future direction. 
+%\begin{enumerate}[i)]
+%\item 
+Second, our current models mostly separate patient and hospital characteristics. However, letting the slope coefficients of the patient characteristics to change, say, linearly in the hospital characteristics, would help in explaining what kind of hospitals are good at treating what kind of patients. Such a model could form the basis of a new publicly available website that enables patients to type in their personal information and compare performance estimates that are personalized and hence more relevant to them. 
 
 
 
-\begin{enumerate}[i)]
-\item Our current models mostly separate patient and hospital characteristics. However, letting the slope coefficients of the patient characteristics to change, say, linearly in the hospital characteristics, would help in explaining what kind of hospitals are good at treating what kind of patients. Furthermore, such a model could form the basis of a new publicly available website that enables patients to type in their personal information and compare performance estimates that are personalized and hence more relevant to them. 
 
-
-
-
-\item Unfortunately, the Hospital Compare model has become the ``gold standard'' in many areas of public reporting.
-%This means that models of many other conditions, such as pneumonia and heart failure, must be re-evaluated. 
-For instance, similar modeling mistakes have been made in rankings of liver transplantation centers. The nature of liver transplantation also poses additional questions: How well are the centers matching their available livers to patients? What is their mortality rate after controlling for the quality of these livers? To the best of our knowledge, no previous research has attempted to answer these specific questions. 
+%\item Unfortunately, the Hospital Compare model has become the ``gold standard'' in many areas of public reporting.
+%%This means that models of many other conditions, such as pneumonia and heart failure, must be re-evaluated. 
+%For instance, similar modeling mistakes have been made in rankings of liver transplantation centers. The nature of liver transplantation also poses additional questions: How well are the centers matching their available livers to patients? What is their mortality rate after controlling for the quality of these livers? To the best of our knowledge, no previous research has attempted to answer these specific questions. 
 
 %
 %Therefore many other areas such as 
 % Pneumonia and Heart Failure. This along with other results and analyses is included in our first paper that is currently being prepared. Part of our future work is to replicate the analysis for pneumonia and congestive heart failure, and also extend our analysis to readmission rates. It is still unclear whether the results will be qualitatively similar to our results on AMI.
 %\item Liver transplant
 %\item Non-parametric models. All the models assume a unimodal and symmetric Gaussian distribution for the hospital-specific effects. It is unlikely that this is a realistic modeling assumption.
-\end{enumerate}
+%\end{enumerate}
 
+\section{Conclusion and Other Research Directions} 
+%Both oftThese two research projects are focused on prediction. They aim to leverage an insight to improve the accuracy of the current state-of-the-art methods. 
+My research interests are not limited to these two projects but span many other areas as well. For one, I believe data collection in judgmental forecasting can be largely improved. Instead of asking experts directly for continuous predictions, it is likely that a more honest belief can be captured via a strategic series of, say, binary questions.
+% than with a single question requiring a continuous answer. 
+Also, given my background in computer science, I am broadly interested in computational statistics and, in particular, the many scalability issues that the classical procedures are facing in today's ``big data'' boom. All in all, I enjoy working with subject-matter experts, am always looking forward to forming new collaborations, and consider dirty real-world data not as a hindrance to my research but rather as an opportunity to learn and develop new methodology.  
+
+
+
+
+%\marginpar{Generally interesting in forecasting. and always looking for new collaborations. insights in forecasting. active sampling to boost predictive performance. }
 
 %\bibliographystyle{myplain.bst}
 \bibliographystyle{myapalike.bst}
