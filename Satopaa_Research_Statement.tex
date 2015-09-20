@@ -211,7 +211,7 @@ The rapidly growing popularity of prediction polls has created an urgent need fo
 %For instance,
 %For three years I have collaborated with one such group, called 
 %This motivated
-This prompted the initiation of a government funded research group called the Good Judgment Project (GJP) (\citealt{ungar2012good}). During its four years of operation, the GJP recruited thousands of forecasters who gave hundreds of thousands of probability estimates about hundreds of future events. Given that these events were chosen by the Intelligence Advanced Research Projects Activity (IARPA), one of the core research objectives was to investigate how prediction polls can improve national security decision-making. This task is non-trivial because typically it is not possible to determine ex-ante which forecaster will be the most accurate, and even if this could be done, heeding only the most accurate forecaster's advice would ignore a potentially large amount of relevant information that is being contributed by the rest of the forecasters. Therefore a better alternative is to combine the
+This prompted the initiation of a government funded research group called the Good Judgment Project (GJP) (\citealt{ungar2012good}). During its four years of operation, the GJP recruited thousands of forecasters who gave hundreds of thousands of probability estimates about hundreds of future events. Given that these events were chosen by the Intelligence Advanced Research Projects Activity (IARPA), one of the core research objectives was to investigate how prediction polls can improve national security decision-making. This task is challenging because typically it is not possible to determine ex-ante which forecaster will be the most accurate, and even if this could be done, heeding only the most accurate forecaster's advice would ignore a potentially large amount of relevant information that is being contributed by the rest of the forecasters. Therefore a better alternative is to combine the
 predictions into a single consensus that represents all the forecasters' advice. 
 
  
@@ -239,25 +239,28 @@ In particular, it is necessary to specify how the forecasts differ from the true
 %the forecasters are all in principle trying to apply the same
 %procedures to the same data but are making numerous small mistakes.
 % -- overall a rather implausible assumption. 
-Consequently, measurement-error-based aggregators, such as the average, median, and other measures of central tendency, are suboptimal. 
-
+%Consequently, measurement-error-based aggregators, such as the average, median, and other measures of central tendency, have poor performance  \citep{satopaa, satopaa2014probability}. 
 For one, 
 even though forecast aggregation literature by and large agrees that the goal is to collect and combine information from different forecasters (see, e.g., \citealt{armstrong2}),
-measures of central tendency fail to do so \citep{satopaa2015combining}. To illustrate, consider two forecasters, each of whom reports a probability estimate for the occurrence of some future event. Suppose that they have access to different information. More specifically, in reference to the diagram in Figure \ref{InfoStr}, 
+measurement-error-based aggregators, such as the average, median, and other measures of central tendency, fail to do so \citep{satopaa2015combining}. To illustrate, consider two forecasters, each of whom reports a probability estimate for the occurrence of some future event, and suppose that they have access to different sets of information. More specifically, in reference to the diagram in Figure \ref{InfoStr}, 
 %Their  information sets are shown in Figure \ref{InfoStr} that represents full information with the unit interval.
 %. In this diagram full information is represented by the unit interval. 
 %Forecaster 1 knows $U \cup M$ while forecaster 2 knows $M \cup V$. Ideally, an aggregator would utilize the forecasters' combined information, namely $U \cup M \cup V$.
 %To illustrate, consider two forecasters, each of whom independently reports a probability estimate of $0.9$ for the occurrence of some future event. Figure \ref{InfoStr} represents full information with the unit interval.
 % and describes the forecasters' private information as subsets of the unit interval. 
 %These forecasters'  information sets are shown in Figure \ref{InfoStr}. In this diagram full information is represented by the unit interval.
-their estimates are based on the partial information sets $U \cup M$ and $M \cup V$, respectively. Now, if both forecasters predict $0.9$, 
+forecaster 1 uses information in $U \cup M$ while forecaster 2 uses information in  $M \cup V$.
+%estimates are based on the partial information sets $U \cup M$ and $M \cup V$, respectively. 
+Now, if both forecasters predict $0.9$, 
 %
 %Ideally, an aggregator would utilize the forecasters' combined information, namely $U \cup M \cup V$.
 %
 %
 % each of whom independently reports a probability estimate of $0.9$ for the occurrence of some future event. If these forecasters see different evidence, 
 % 
- then clearly the combined information $U \cup M \cup V$ should give an aggregate forecast somewhat greater than $0.9$. In this simple scenario, however, measures of central tendency will always equal to $0.9$. Unfortunately, they fail to assume information heterogeneity among the forecasters and hence end up under-estimating the amount of combined information. As a result, they are under-confident and have poor out-of-sample performance  \citep{satopaa, satopaa2014probability}. 
+ then clearly the combined information $U \cup M \cup V$ should give an aggregate forecast somewhat greater than $0.9$. In this simple scenario, however, measures of central tendency aggregate to $0.9$. Therefore they fail to account for the  information heterogeneity among the forecasters. 
+% Instead, they assume that all forecasters use the same information. 
+ This under-estimates the amount of combined information and produces aggregates that are under-confident and have poor out-of-sample performance  \citep{satopaa, satopaa2014probability}. 
 
 %  If they are seeing the same evidence, then the optimal aggregate
 %forecast is $2/3$.  If they are seeing different evidence,
@@ -299,18 +302,27 @@ their estimates are based on the partial information sets $U \cup M$ and $M \cup
 %extremizing techniques.
 %%
 
-Therefore, improving the general practice of aggregation is hindered by the lack of a formal description of a more appropriate source of forecast heterogeneity. 
+Therefore progress in developing new methodology for analyzing and aggregating multiple predictions remains limited until an appropriate source of forecast heterogeneity is formally introduced.
+% by the lack of a formal and appropriate source of forecast heterogeneity.   
+% and  forecast aggregation can only make limited progress as long as methodology continues to be developed around measurement error.  
+%It is clear that progress in the general practice of aggregation is 
+%hindered by the absence of a formal description of a more appropriate source of forecast heterogeneity. 
 %Not only does this leave something to be desired from an explanatory
 %point of view, these approaches 
 %%are also subject to overfitting. Most importantly, these techniques 
 %are also subject to overfitting, provide little
 %insight beyond the amount of extremizing itself, and hence lack a clear direction of continued improvement.
 %In a series of three papers \citep{satopaa2015combining, satopaamodeling, satopaa2015partial}, 
-In response to this need, for the past three years I have collaborated with the GJP and used their large forecasting database to test hypotheses and develop fundamental theory of an alternative source of forecast heterogeneity. In particular, my dissertation work formalizes \textit{information diversity} as a source of heterogeneity. 
+In response to this need, for the past three years I have collaborated with the GJP and used their large forecasting database to test hypotheses and develop fundamental theory of an alternative source of forecast heterogeneity. In particular, my dissertation formalizes and proposes \textit{information diversity} as an alternative to measurement error.
 %For instance, forecasters studying the same (or different) articles about a company may use separate parts of the information and hence report differing predictions on the company's future revenue.
 %modeling framework, called the \textit{partial information framework}, that is based on an alternative source of heterogeneity. 
-This forms the basis of a novel modeling framework, called the \textit{partial information framework}, that is extremely general and can be applied to a broad class of prediction problems. This framework is not only more plausible on the micro-level
-than any other framework has been to date but also provides aggregators that collect information from the forecasters. 
+This forms the basis of a novel modeling framework, called the \textit{partial information framework}, that is more plausible on the micro-level
+than any other framework has been to date. The framework is not only extremely general but also provides aggregators that collect information from the forecasters.
+%, and c.
+%
+% can be used to construct aggregators that collect information from the forecasters across a broad class of prediction problems. 
+%The framework is not only more plausible on the micro-level
+%than any other framework has been to date but also provides aggregators that collect information from the forecasters. 
 %This framework has been discussed in a series of three papers \citep{satopaa2015combining, satopaamodeling, satopaa2015partial}. Overall, we have had extremely positive feedback from leaders in the field. 
  A part of this work is described below.
 %forecast heterogeneity, called \textit{information diversity}, that serves as an alternative to measurement error. 
@@ -318,9 +330,12 @@ than any other framework has been to date but also provides aggregators that col
 
 
 \begin{figure}[t!]
+\vspace{-1em}
    \centering
    \includegraphics[width = \textwidth]{N=2.png} % requires the graphicx package
-  \caption{Illustration of Information Distribution among Two Forecasters. The top bar represents all possible information that can be known about $Y$. The bar leveled horizontally with Forecaster $j$ represents the $j$th forecaster's information set.}
+  \caption{Illustration of Information Distribution among Two Forecasters.
+%   The top bar represents all possible information that can be known about $Y$. The bar leveled horizontally with Forecaster $j$ represents the $j$th forecaster's information set.
+   }
      \label{InfoStr}
 \end{figure}
 
@@ -479,14 +494,16 @@ $X_j$'s.
 
 %At this level of specificity, the model, while too general to be applied, is almost certainly correct.
 
-Even though the partial information framework, as introduced above, is intuitively appealing and certainly an accurate description of the real world, it is clearly too abstract to be applied in practice.  If it is to ever become common practice in forecast aggregation, a close yet practical specification within the framework must be introduced and made accessible to practitioners. Fortunately, this only requires one additional assumption, namely the choice of a joint distribution for the model variables $Y, X_1, \dots, X_N$. 
+Even though the partial information framework, as briefly described above, is intuitively appealing, it is clearly too abstract to be applied in practice. Therefore, if it is to ever become common practice in forecast aggregation, a close yet practical specification within the framework must be introduced and made accessible to practitioners. Fortunately,  \cite{satopaa2015partial} explain that this only requires one additional assumption, namely the choice of a joint distribution for the model variables $Y, X_1, \dots, X_N$. 
 %Different choices lead to different partial information models. 
 % In order to construct a more specific model within the framework, a joint distribution for the model variables $Y, X_1, \dots, X_N$ must be specified.
-  \cite{satopaa2015partial} provide both intuitive and technical motivations for using the multivariate Gaussian distribution. 
+ They provide both intuitive and technical motivations for using the multivariate Gaussian distribution
 %  The resulting model, named the \textit{Gaussian partial information model}, has been extremely successful. 
 %  First, \cite{satopaamodeling} use it to provide intuition on when and how much the average forecast should be extremized. Second, \cite{satopaa2015partial} estimate $\bSigma_X$ for forecasters addressing more than one related problems and
 %  
-They apply the resulting model, named the \textit{Gaussian partial information model}, to real-world prediction polls, involving both probability and real-valued forecasts. In both cases, the model is extremely successful. In particular, the revealed aggregator achieves large performance improvements over the common measurement-error-based aggregators, suggesting that  information diversity is the more important  source of forecast heterogeneity. 
+and apply the resulting model, named the \textit{Gaussian partial information model}, to real-world prediction polls, involving both probability and real-valued forecasts. In both cases, 
+%the model is extremely successful. In particular, 
+the revealed aggregator achieves large performance improvements over the common measurement-error-based aggregators, suggesting that  information diversity is the more important  source of forecast heterogeneity. 
 
 
 %Intuitively, this choice can be motivated by a pool of $M$ information particles. Each particle, which can be interpreted as representing a piece of information, has either a positive or negative effect on $Y$. The total sum (integral) of these particles determines the final value of $Y$. Each forecaster, however, observes only the sum of some subset of the particles. Based on this sum, the forecaster makes an estimate of $Y$. 
@@ -528,13 +545,32 @@ They apply the resulting model, named the \textit{Gaussian partial information m
 \textbf{2.2. FUTURE RESEARCH:}
  Our work proposes an alternative to one of the core concepts in statistics, namely measurement error. 
 %Given that measurement error is one of the core concepts in statistics, an enormous amount of research derives from it. Information diversity is a natural yet fundamentally different alternative to it.
-Given the fundamental nature of this innovation, the partial information framework offers much future research, involving both theoretical and applied projects. The following enumeration only lists some of the more natural next steps. 
+Given the fundamental nature of this innovation, the partial information framework offers much future research, involving both theoretical and applied projects. The following enumeration only lists some of the more natural next steps:
+
+% \vspace{0.5em}
+%\noindent
+%a)  \cite{satopaa2015partial} apply the Gaussian model in a setup where the forecasters participate in separate yet similar prediction problems or give repeated forecasts on a single recurring event. In the most extreme case, however, only a set of forecasts of a single unknown outcome are available. How should the forecasts be aggregated in such a low-data setting?
+%% \cite{satopaa2015combining} suggest that any type of weighted average (or some other measure of central tendency) is a poor choice. 
+%%A better alternative was discussed by \cite{satopaamodeling}. They assume that $\bSigma_X$ is compound symmetric and then combine the forecasts with the revealed aggregator under the corresponding Gaussian partial information model. 
+% Developing a partial information aggregator that can be directly applied to a single set of forecasts is certainly a future research direction with potential for high impact. One idea is to first derive the aggregator based on the Gaussian model and then integrate out any unknown parameters with respect to their posterior distribution. Currently, we have
+%work in progress analyzing such \textit{Bayes-Gaussian aggregators} but much more work is needed \citep{ernst2015, satopaaBayesGaussian}. 
+%
+%
+% \vspace{0.5em}
+%\noindent
+%b)  Most probability aggregation procedures use one probability estimate per forecaster, even though it is common for experts studying real problems to update their probability estimates over time. \cite{satopaa2014probability} advance into unexplored areas of probability aggregation by considering a dynamic context in which experts can update their beliefs at random intervals. Overall, this paper was very well received. The aggregator therein, however, is based on measurement error. Therefore, an interesting future project would be to utilize martingale theory and develop a time-series aggregator based on partial information. 
+%
+% \vspace{0.5em}
+%\noindent
+%c)  The partial information framework can be also applied to forecasts made by different models. This suggests many contributions in machine learning. For instance, semi-supervised learning refers to setups with a large amount of data of which only a relatively few have been labeled. Many of the commonly used ensemble techniques, such as stacking or Bayesian averaging, however, require labeled observations to combine the individual models' predictions. In the contrary, the partial information framework can aggregate predictions without labeled data. This suggests an opportunity for better aggregation and hence overall improved prediction accuracy.
+
+
 
 \begin{enumerate}[i)]
-\item \cite{satopaa2015partial} apply the Gaussian model in a setup where the forecasters participate in separate yet similar prediction problems or give repeated forecasts on a single recurring event. In the most extreme case, however, only a set of forecasts of a single unknown outcome are available. How should the forecasts be aggregated in such a low-data setting?
+\item \cite{satopaa2015partial} apply the Gaussian model in a setup where the forecasters participate in separate yet similar prediction problems. In the most extreme case, however, only a set of forecasts of a single unknown outcome are available. How should the forecasts be aggregated in such a low-data setting?
 % \cite{satopaa2015combining} suggest that any type of weighted average (or some other measure of central tendency) is a poor choice. 
 %A better alternative was discussed by \cite{satopaamodeling}. They assume that $\bSigma_X$ is compound symmetric and then combine the forecasts with the revealed aggregator under the corresponding Gaussian partial information model. 
- Developing a partial information aggregator that can be applied to a single set of forecasts and has no dependency on parameters is certainly a future research direction with potential for high impact. One idea is to first derive the aggregator based on the Gaussian model and then integrate out any unknown parameters with respect to their posterior distribution. Currently, we have
+ Developing a partial information aggregator that can be directly applied to a single set of forecasts is certainly a future research direction with potential for high impact. One idea is to first derive the aggregator based on the Gaussian model and then integrate out any unknown parameters with respect to their posterior distribution. Currently, we have
 work in progress analyzing such \textit{Bayes-Gaussian aggregators} but much more work is needed \citep{ernst2015, satopaaBayesGaussian}. 
  
  %The first step is to develop an aggregator that is both marginally consistent and expanding. Finding an aggregator that maintains forecasters' reliability seems more difficult. 
@@ -653,13 +689,17 @@ Our AMI mortality data, which are a very careful imitation of Medicare's data an
 % \vspace{-1em} \subsection{Future Research} \vspace{-0.2em}
  \vspace{0.5em}
 \noindent
-\textbf{3.1. FUTURE RESEARCH:} The largely unprincipled modeling practice in public reporting offers many research opportunities. For instance, we have serious shortcomings in the models used for ranking liver transplantation centers.  Even though our work corrects some of the common misconceptions and lays down foundations upon which more principled public reporting can be developed, much work remains to be done. One direction is to repeat our study of AMI on heart failure and pneumonia, for which we already have close imitations of Medicare's data. 
+\textbf{3.1. FUTURE RESEARCH:} The largely unprincipled modeling practice in public reporting offers many research opportunities. 
+%For instance, we have found serious shortcomings in the models used for ranking liver transplantation centers.  
+Even though our work corrects some of the common misconceptions and lays down foundations upon which more principled public reporting can be developed, much work remains to be done. One direction is 
+%to repeat our study of AMI on heart failure and pneumonia, for which we already have close imitations of Medicare's data. 
 %have data that closely imitate that of Medicare's. 
 % In particular, 
 %The following enumeration provides some future direction. 
 %\begin{enumerate}[i)]
 %\item 
-Another interesting avenue is to explore interactions between hospital and patient characteristics. For instance, 
+%Another interesting avenue is 
+to explore interactions between hospital and patient characteristics. For instance, 
 %Second, our current models mostly separate patient and hospital characteristics. However, 
 letting the slope coefficients of the patient characteristics to change, say, linearly in the hospital characteristics, would help in explaining what kind of hospitals are good at treating what kind of patients. Such a model could form the basis of a new publicly available website that enables patients to type in their personal information and compare performance estimates that are personalized and hence more relevant to them. 
 
@@ -680,7 +720,7 @@ letting the slope coefficients of the patient characteristics to change, say, li
  \vspace{0.5em}
 \noindent
 %\section{Conclusion: Other Research Directions} 
-\textbf{4. CONCLUSION: OTHER RESEARCH DIRECTIONS: }
+\textbf{4. CONCLUSION AND OTHER RESEARCH DIRECTIONS: }
 My research interests are not limited to these two projects, but also span many other areas. For one,
 I believe data collection in judgmental forecasting can be greatly improved by interactive elicitation of judgements.
 Also, given my background in computer science, I am broadly interested
