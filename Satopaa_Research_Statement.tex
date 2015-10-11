@@ -192,11 +192,12 @@ THE WHARTON SCHOOL OF THE UNIVERSITY OF PENNSYLVANIA
 %\subsection*{Motivation} \vspace{-0.2em}
  \vspace{0.5em}
 \noindent
-\textbf{2. MODELING, AGGREGATING, AND IMPROVING PREDICTIONS:}  Modern social and computer networks facilitate collection of multiple
+\textbf{2. MODELING AND AGGREGATING PREDICTIONS:}  Modern social and computer networks have popularized \textit{prediction polling} -- a new type of polling in which multiple
 % modern social and computer networks have permitted collection of predictions from multi
 %Prediction polling is a new type of polling in which 
 %Past literature has distinguished two types of polling: prediction and opinion polling. In broad terms, an opinion poll is a survey of public opinion, whereas a prediction poll involves
-  agents' predictions about the value of some quantity of interest \citep{goel2010prediction}. These so called \textit{prediction polls} may ask the agents, for instance,  who they think will win the next presidential election.
+  agents collectively predict the value of some quantity of interest \citep{goel2010prediction}. 
+%  These so called \textit{prediction polls} may ask the agents, for instance,  who they think will win the next presidential election.
 %For instance, consider a presidential election poll. An opinion poll typically asks the voters who they will vote for. A prediction poll, on the other hand, could ask which candidate they think will win. A liberal voter in a dominantly conservative country is likely to answer differently to these two questions. 
 %%%In broader terms, 
 %%% Prediction polling is, of course, not limited to probability forecasts but can be applied to others types, such as point estimates or even probability density functions, as well. 
@@ -261,7 +262,7 @@ That is, in reference to Figure \ref{InfoStr},
 %To illustrate, consider two forecasters, each of whom independently reports a probability estimate of $0.9$ for the occurrence of some future event. Figure \ref{InfoStr} represents full information with the unit interval.
 % and describes the forecasters' private information as subsets of the unit interval. 
 %These forecasters'  information sets are shown in Figure \ref{InfoStr}. In this diagram full information is represented by the unit interval.
-the forecasters use respective sets $U$ and $M$ that are disjoint subsets of all information about the future event. 
+they use respective sets $U$ and $M$ that are disjoint subsets of all information about the future event. 
 %forecaster $1$ uses information in $U$ while forecaster $2$ uses information in $M$ and 
 %the forecasters use respective information sets $U$ and $M$ with
 % $U \cap M = \emptyset$.
@@ -568,14 +569,14 @@ the revealed aggregator achieves large performance improvements over the common 
  \vspace{0.5em}
 \noindent
 \textbf{2.2. CURRENT AND FUTURE RESEARCH:}
- Given that my dissertation proposes an alternative to a core statistical concept, namely measurement error, it 
+This work proposes an alternative to a core statistical concept, namely measurement error, and
 %Given that measurement error is one of the core concepts in statistics, an enormous amount of research derives from it. Information diversity is a natural yet fundamentally different alternative to it.
  leads to a new modeling paradigm that is fundamentally different
 % yet in many applications more appropriate than
 from classical statistics. 
 % hence 
 %Given the fundamental nature of this innovation, the partial information framework
-This leads to a range of theoretical and applied projects in statistics and other related fields. 
+This suggests a range of theoretical and applied projects in statistics and other related fields. 
 % much future research, involving both theoretical and applied projects. 
  The following illustrates some specific projects:
 
@@ -610,7 +611,7 @@ work in progress analyzing such \textit{Bayes-Gaussian aggregators} but much mor
  %The first step is to develop an aggregator that is both marginally consistent and expanding. Finding an aggregator that maintains forecasters' reliability seems more difficult. 
 
 %\item A promising empirical direction is the Bayesian approach. These techniques have been found superior to the likelihood-based alternatives in many applications with small or moderately sized datasets. Therefore, given that the number of forecasts in a prediction poll is typically quite small, a Bayesian approach is likely to improve the quality of the final aggregate. This would involve  developing a prior distribution for $\bSigma_{X}$ -- a problem that seems interesting in itself because of the semidefinite constraints that  (\ref{cov_str}) places on $\bSigma_{X}$ \citep{satopaa2015partial}.  
-\item Information diversity is not only relevant in estimation but also offers new directions in other areas of statistics. For instance, some of our current work explores information diversity in testing hypotheses about a binary outcome \citep{satopaaTesting}. The hope is to eventually extend this project to tests of multiple hypotheses with information overlap. 
+\item Information diversity is not only relevant in estimation but also offers new directions in other areas of statistics. For instance, some of our current work explores information diversity in testing hypotheses about a binary outcome \citep{satopaaTesting}. The hope is to eventually extend this work to simultaneous testing of multiple informationally overlapping hypotheses.
 
 \item Most aggregation procedures use one estimate per forecaster, even though it is common for experts to update their beliefs over time. 
 %\cite{satopaa2014probability} advance into unexplored areas of probability aggregation by considering a dynamic context in which experts can update their beliefs at random intervals. Overall, this paper was very well received. The aggregator therein, however, is based on measurement error. Therefore, 
@@ -733,7 +734,7 @@ Our AMI mortality data, which are a very careful imitation of Medicare's data an
 %%For instance, we have found serious shortcomings in the models used for ranking liver transplantation centers.  
 %Even though our work corrects some of the common misconceptions and lays down foundations upon which more principled public reporting can be developed, much work remains to be done.
 %Our future work involves
-In terms of future work, we plan to 
+In the future we plan to 
 %to repeat our study of AMI on heart failure and pneumonia, for which we already have close imitations of Medicare's data. 
 %have data that closely imitate that of Medicare's. 
 % In particular, 
@@ -741,13 +742,16 @@ In terms of future work, we plan to
 %\begin{enumerate}[i)]
 %\item 
 %Another interesting avenue is 
-explore interactions between hospital and patient characteristics. 
+study models that allow hospital and patient characteristics to interact. Such
+models would help us identify types of patients that each hospital treats particularly well
 %For instance, 
 %Second, our current models mostly separate patient and hospital characteristics. However, 
 %letting the slope coefficients of the patient characteristics to change, say, linearly in the hospital characteristics, 
-Such a model would a) indicate for each hospital the type of patients it treats particularly well  
+%Such a model would
+% indicate for each hospital the type of patients it treats particularly well  
 % what kind of hospitals are good at treating what kind of patients
-  and b) form the basis of a new publicly available website where patients can type in their personal information and compare performance estimates that are personalized and hence more relevant to them. 
+  and
+   also form the basis of a new publicly available website where patients can type in their personal information and compare performance estimates that are personalized and hence more relevant to them. 
 
 
 
@@ -777,9 +781,6 @@ look forward to forming new collaborations, and consider dirty real-world data n
 to my research but rather as an opportunity to learn and develop new methodologies.
 
 
-
-
-\marginpar{make sure all references look the same; some are misc and some are journals}
 
 
 %\marginpar{Generally interesting in forecasting. and always looking for new collaborations. insights in forecasting. active sampling to boost predictive performance. }
