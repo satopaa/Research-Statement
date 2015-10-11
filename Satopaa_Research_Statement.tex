@@ -192,27 +192,33 @@ THE WHARTON SCHOOL OF THE UNIVERSITY OF PENNSYLVANIA
 %\subsection*{Motivation} \vspace{-0.2em}
  \vspace{0.5em}
 \noindent
-\textbf{2. MODELING, AGGREGATING, AND IMPROVING PREDICTIONS:} Past literature has distinguished two types of polling: prediction and opinion polling. In broad terms, an opinion poll is a survey of public opinion, whereas a prediction poll involves multiple agents collectively predicting the value of some quantity of interest \citep{goel2010prediction}. 
-For instance, consider a presidential election poll. An opinion poll typically asks the voters who they will vote for. A prediction poll, on the other hand, could ask which candidate they think will win. A liberal voter in a dominantly conservative country is likely to answer differently to these two questions. 
-%%In broader terms, 
-%% Prediction polling is, of course, not limited to probability forecasts but can be applied to others types, such as point estimates or even probability density functions, as well. 
-Even though opinion polls have been the dominant focus historically, 
+\textbf{2. MODELING, AGGREGATING, AND IMPROVING PREDICTIONS:}  Modern social and computer networks facilitate collection of multiple
+% modern social and computer networks have permitted collection of predictions from multi
+%Prediction polling is a new type of polling in which 
+%Past literature has distinguished two types of polling: prediction and opinion polling. In broad terms, an opinion poll is a survey of public opinion, whereas a prediction poll involves
+  agents' predictions about the value of some quantity of interest \citep{goel2010prediction}. These so called \textit{prediction polls} may ask the agents, for instance,  who they think will win the next presidential election.
+%For instance, consider a presidential election poll. An opinion poll typically asks the voters who they will vote for. A prediction poll, on the other hand, could ask which candidate they think will win. A liberal voter in a dominantly conservative country is likely to answer differently to these two questions. 
+%%%In broader terms, 
+%%% Prediction polling is, of course, not limited to probability forecasts but can be applied to others types, such as point estimates or even probability density functions, as well. 
+%Even though opinion polls have been the dominant focus historically, 
 %Prediction polling involves multiple agents collectively predicting the value of some quantity of interest \citep{goel2010prediction, mellers2014psychological}. 
 %Asking multiple agents to collectively predict the value of some quantity of interest, a.k.a. \textit{prediction polling}, 
-prediction polls have become increasingly popular in the recent years, due to modern social and computer networks.
+%Prediction polls have become increasingly popular in the recent years, due to modern social and computer networks.
 % \citep{goel2010prediction, mellers2014psychological}.
-This has given rise to crowdsourcing platforms, such as MTurk and Witkey, and many companies, such as Myriada, Lumenogic, and Inkling, that have managed to successfully capitalize on the benefits of collective wisdom. 
-
-The rapidly growing popularity of prediction polls has created an urgent need for 
-%This rapidly growing popularity and hence an 
-%urgent need for
-  methodology and tools for analyzing multiple predictions.
+%This has given rise to crowdsourcing platforms, such as MTurk and Witkey, and many companies, such as Myriada, Lumenogic, and Inkling, that have managed to successfully capitalize on the benefits of collective wisdom. 
+%The rapidly growing popularity of prediction polls has created an urgent need for 
+%%This rapidly growing popularity and hence an 
+%%urgent need for
+%  methodology and tools for analyzing multiple predictions.
 % polls motivated 
 %For instance,
 %For three years I have collaborated with one such group, called 
 %This motivated
-This prompted the initiation of a government funded research group called the Good Judgment Project (GJP) (\citealt{ungar2012good}). During its four years of operation, the GJP recruited thousands of forecasters who gave hundreds of thousands of probability estimates about hundreds of future events. Given that these events were chosen by the Intelligence Advanced Research Projects Activity (IARPA), one of the core research objectives was to investigate how prediction polls can improve national security decision-making. This task is challenging because typically it is not possible to determine ex-ante which forecaster will be the most accurate, and even if this could be done, heeding only the most accurate forecaster's advice would ignore a potentially large amount of relevant information that is being contributed by the rest of the forecasters. Therefore a better alternative is to combine the
-predictions into a single consensus that represents all the forecasters' advice. 
+%This prompted the initiation of a government funded research group called the Good Judgment Project (GJP) (\citealt{ungar2012good}). During its four years of operation, the GJP recruited thousands of forecasters who gave hundreds of thousands of probability estimates about hundreds of future events. 
+%Given that these events were chosen by the Intelligence Advanced Research Projects Activity (IARPA), one of the core research objectives was to investigate how prediction polls can improve national security decision-making. This task is challenging because
+ Typically it is not possible to determine ex-ante which forecaster will be the most accurate, and even if this could be done, heeding only the most accurate forecaster's advice would ignore a potentially large amount of relevant information that is being contributed by the rest of the forecasters. Therefore a better alternative is to combine the
+predictions into a single consensus that represents as much of the forecasters' combined information as possible.
+% the forecasters' advice. 
 
  
  
@@ -231,36 +237,47 @@ predictions into a single consensus that represents all the forecasters' advice.
 % The final choice of the combination rule, however, is crucial because it often decides how much of the forecasters' total information is incorporated and hence how well the consensus performs in terms of predictive accuracy.
 %The main methodological challenge that the GJP faced was to decide how to combine the predictions into a single consensus prediction.
 % This problem, known as the \textit{aggregation problem}, has historically troubled researchers in many fields, including economics \citep{blix2001good},  weather forecasting \citep{raftery2005using}, political science \citep{graefea2014combining}, and others. 
- In general, principled aggregation begins with an assumption about the source of heterogeneity among the predictions.
+ In general, principled aggregation requires an assumption about the source of heterogeneity among the predictions.
 In particular, it is necessary to specify how the forecasts differ from the true value of the target quantity.
- For the past several decades, potentially due to the early forms of data collection, \textit{measurement error} has been considered as the main source of heterogeneity. This approach has become the standard and is often applied in practice even when data variation is dominated  by causes besides error in measurement. For instance, assuming measurement error may be reasonable in modeling repeated estimates from a single instrument. However, it is unlikely to hold in prediction polling, where the estimates arise from multiple, often widely different sources.
+ For the past several decades, potentially due to the early forms of data collection, \textit{measurement error} has been considered as the main source of heterogeneity. This approach has become the standard and is often applied in practice even when data variation is dominated  by causes besides error in measurement. 
+ For instance, assuming measurement error may be reasonable in modeling repeated estimates from a single instrument. However, it is unlikely to hold in prediction polling, where estimates arise from multiple, often widely different sources.
 %  As a result, aggregators based on measurement error are biased and do not collect information. 
 % At best, this forces us to imagine that
 %the forecasters are all in principle trying to apply the same
 %procedures to the same data but are making numerous small mistakes.
 % -- overall a rather implausible assumption. 
 %Consequently, measurement-error-based aggregators, such as the average, median, and other measures of central tendency, have poor performance  \citep{satopaa, satopaa2014probability}. 
-For one, 
-even though forecast aggregation literature by and large agrees that the goal is to collect and combine information from different forecasters (see, e.g., \citealt{armstrong2}),
-measurement-error-based aggregators, such as the average, median, and other measures of central tendency, fail to do so \citep{satopaa2015combining}. To illustrate, consider two forecasters, each of whom reports a probability estimate for the occurrence of some future event, and suppose that they have access to different sets of information. More specifically, in reference to the diagram in Figure \ref{InfoStr}, 
+%In particular,
+%even though forecast aggregation literature by and large agrees that the goal is to collect and combine information from different forecasters (see, e.g., \citealt{armstrong2}),
+More importantly, however, measurement-error-based aggregators, such as the average, median, and other measures of central tendency, do not capture the forecasters' combined information \citep{satopaa2015combining}. To illustrate, consider two forecasters who use independent sets of evidence to estimate the probability of some future event. 
+% to be $0.9$ 
+%but based on independent evidence.
+% yet both estimate the probability of some future event to be $0.9$. 
+%Suppose that they have access to different sets of information. More specifically, 
+That is, in reference to Figure \ref{InfoStr},  
 %Their  information sets are shown in Figure \ref{InfoStr} that represents full information with the unit interval.
 %. In this diagram full information is represented by the unit interval. 
 %Forecaster 1 knows $U \cup M$ while forecaster 2 knows $M \cup V$. Ideally, an aggregator would utilize the forecasters' combined information, namely $U \cup M \cup V$.
 %To illustrate, consider two forecasters, each of whom independently reports a probability estimate of $0.9$ for the occurrence of some future event. Figure \ref{InfoStr} represents full information with the unit interval.
 % and describes the forecasters' private information as subsets of the unit interval. 
 %These forecasters'  information sets are shown in Figure \ref{InfoStr}. In this diagram full information is represented by the unit interval.
-forecaster 1 uses information in $U \cup M$ while forecaster 2 uses information in  $M \cup V$.
+the forecasters use respective sets $U$ and $M$ that are disjoint subsets of all information about the future event. 
+%forecaster $1$ uses information in $U$ while forecaster $2$ uses information in $M$ and 
+%the forecasters use respective information sets $U$ and $M$ with
+% $U \cap M = \emptyset$.
+% while forecaster 2 uses information in  $M$.
 %estimates are based on the partial information sets $U \cup M$ and $M \cup V$, respectively. 
-Now, if both forecasters predict $0.9$, 
+If both forecasters predict $0.9$, 
 %
 %Ideally, an aggregator would utilize the forecasters' combined information, namely $U \cup M \cup V$.
 %
 %
 % each of whom independently reports a probability estimate of $0.9$ for the occurrence of some future event. If these forecasters see different evidence, 
 % 
- then clearly the combined information $U \cup M \cup V$ should give an aggregate forecast somewhat greater than $0.9$. In this simple scenario, however, measures of central tendency aggregate to $0.9$. Therefore they fail to account for the  information heterogeneity among the forecasters. 
-% Instead, they assume that all forecasters use the same information. 
- This under-estimates the amount of combined information and produces aggregates that are under-confident and have poor out-of-sample performance  \citep{satopaa, satopaa2014probability}. 
+ then clearly the combined information $U \cup M$ should give an aggregate forecast somewhat greater than $0.9$. In this simple scenario, however, all measures of central tendency aggregate to $0.9$. Therefore they fail to account for the  information heterogeneity among the forecasters.  Instead, they assume all forecasters to use the same information and explain any remaining variation with measurement error. 
+ This under-estimates the amount of combined information
+% , produces aggregates that are under-confident, 
+ and leads to poor out-of-sample performance  \citep{satopaa, satopaa2014probability}. 
 
 %  If they are seeing the same evidence, then the optimal aggregate
 %forecast is $2/3$.  If they are seeing different evidence,
@@ -302,7 +319,7 @@ Now, if both forecasters predict $0.9$,
 %extremizing techniques.
 %%
 
-Therefore progress in developing new methodology for analyzing and aggregating multiple predictions remains limited until an appropriate source of forecast heterogeneity is formally introduced.
+%Therefore progress in developing new methodology for analyzing and aggregating multiple predictions remains limited until an appropriate source of forecast heterogeneity is formally introduced.
 % by the lack of a formal and appropriate source of forecast heterogeneity.   
 % and  forecast aggregation can only make limited progress as long as methodology continues to be developed around measurement error.  
 %It is clear that progress in the general practice of aggregation is 
@@ -313,7 +330,11 @@ Therefore progress in developing new methodology for analyzing and aggregating m
 %are also subject to overfitting, provide little
 %insight beyond the amount of extremizing itself, and hence lack a clear direction of continued improvement.
 %In a series of three papers \citep{satopaa2015combining, satopaamodeling, satopaa2015partial}, 
-In response to this need, for the past three years I have collaborated with the GJP and used their large forecasting database to test hypotheses and develop fundamental theory of an alternative source of forecast heterogeneity. In particular, my dissertation formalizes and proposes \textit{information diversity} as an alternative to measurement error.
+%In response to this need, 
+In response. my dissertation proposes and formalizes \textit{information diversity} as an alternative source of forecast heterogeneity.
+
+
+for the past three years I have collaborated with a government funded research group called the Good Judgment Project (\citealt{ungar2012good}) and used their large forecasting database to test hypotheses and develop an alternative source of forecast heterogeneity. In particular, my dissertation formalizes and proposes \textit{information diversity} as an alternative to measurement error.
 %For instance, forecasters studying the same (or different) articles about a company may use separate parts of the information and hence report differing predictions on the company's future revenue.
 %modeling framework, called the \textit{partial information framework}, that is based on an alternative source of heterogeneity. 
 This forms the basis of a novel modeling framework, called the \textit{partial information framework}, that is more plausible on the micro-level
@@ -337,6 +358,7 @@ than any other framework has been to date. The framework is not only extremely g
 %   The top bar represents all possible information that can be known about $Y$. The bar leveled horizontally with Forecaster $j$ represents the $j$th forecaster's information set.
    }
      \label{InfoStr}
+   \vspace{-0.5em}
 \end{figure}
 
 %In particular,  any variation in the forecasts is assumed to stem from information available to the forecasters and how they decide to use it. 
@@ -358,12 +380,13 @@ than any other framework has been to date. The framework is not only extremely g
 %%Therefore nobody knows information in $W$. 
 %Unfortunately, averaging aggregators do not behave like information aggregators. Instead, they assume that all forecasters use the same information and hence never appear more informed than the most informed individual forecaster \citep{satopaa2015combining}. This dramatically under-estimates the amount of combined information and leads to an under confident aggregate.  On the other hand, by assuming partially overlapping information sets, the partial information framework is able to estimate an aggregate that reflects the forecasters'  combined information.
 %To make this specific, 
-Consider $N$ forecasters and suppose forecaster $j$ predicts $X_j$ for some quantity of interest $Y$. The partial information framework assumes that the observables $Y$ and $X_j$ are measurable random variables under some common probability space $(\Omega, \F , \P)$. 
-The principal $\sigma$-field $\F$ can be interpreted as all the possible information that can be known about $Y$. 
+Consider $N$ forecasters and suppose forecaster $j$ predicts $X_j$ for some quantity of interest $Y$. The partial information framework assumes that $Y$ and $X_j$ are measurable random variables under some probability space $(\Omega, \F , \P)$. 
+The $\sigma$-field $\F$ holds all possible information about $Y$. 
 %Under the partial information framework, the forecasters operate under the same probability model but use different subsets of the full information. In fact, i
-In any Bayesian setup, with quadratic loss or some other loss function minimized by the conditional expectation, it is more or less tautological that
+%In any Bayesian setup, with quadratic loss or some other loss function minimized by the conditional expectation, it is more or less tautological that
 %More specifically,
-forecaster $j$ predicts $X_j = \E(Y \| \F_j)$ based on a partial information set $\F_j \subseteq \F$. Therefore $\F_i \neq \F_j$ if $X_i \neq X_j$, and forecast heterogeneity stems purely from information diversity.  
+%The 
+Forecaster $j$ then predicts $X_j = \E(Y \| \F_j)$, where $\F_j \subseteq \F$ holds all information used in the forecast. In other words,  if the forecaster uses a simple rule, $\F_j$ may not be the full $\sigma$-field of information available to the forecaster but rather a smaller $\sigma$-field corresponding to the information actually used by the rule. Therefore $\F_i \neq \F_j$ if $X_i \neq X_j$, and forecast heterogeneity stems purely from information diversity.  
 % Note, however, that if forecaster $j$ uses a simple rule, $\F_j$ may not be the full $\sigma$-field of information available to the forecaster but rather a smaller $\sigma$-field corresponding to the information used by the rule. Furthermore, if two forecasters have access to the same $\sigma$-field, they may decide to use different sub-$\sigma$-fields, leading to different predictions. 
 %%%This is reminiscent of a forecasting algorithm that only uses
 %%%a similarly restricted subset of information. 
@@ -494,17 +517,19 @@ $X_j$'s.
 
 %At this level of specificity, the model, while too general to be applied, is almost certainly correct.
 
-Even though the partial information framework, as briefly described above, is intuitively appealing, it is clearly too abstract to be applied in practice. Therefore, if it is to ever become common practice in forecast aggregation, a close yet practical specification within the framework must be introduced and made accessible to practitioners. Fortunately,  \cite{satopaa2015partial} explain that this only requires one additional assumption, namely the choice of a joint distribution for the model variables $Y, X_1, \dots, X_N$. 
+Even though the partial information framework, as briefly described above, is intuitively appealing, it is clearly too abstract to be applied in practice. Therefore, if it is to ever become common practice in forecast aggregation, a close yet practical specification within the framework must be introduced and made accessible to practitioners. Fortunately,  \cite{satopaa2015partial} explain that this only requires one additional assumption, namely the choice of a parametric family for the joint distribution of $Y, X_1, \dots, X_N$. 
 %Different choices lead to different partial information models. 
 % In order to construct a more specific model within the framework, a joint distribution for the model variables $Y, X_1, \dots, X_N$ must be specified.
  They provide both intuitive and technical motivations for using the multivariate Gaussian distribution
 %  The resulting model, named the \textit{Gaussian partial information model}, has been extremely successful. 
 %  First, \cite{satopaamodeling} use it to provide intuition on when and how much the average forecast should be extremized. Second, \cite{satopaa2015partial} estimate $\bSigma_X$ for forecasters addressing more than one related problems and
 %  
-and apply the resulting model, named the \textit{Gaussian partial information model}, to real-world prediction polls, involving both probability and real-valued forecasts. In both cases, 
+and apply the resulting \textit{Gaussian partial information model} to real-world prediction polls, involving both probability and real-valued forecasts. In both cases, 
 %the model is extremely successful. In particular, 
 the revealed aggregator achieves large performance improvements over the common measurement-error-based aggregators, suggesting that  information diversity is the more important  source of forecast heterogeneity. 
 
+
+%\marginpar{Metnion how different this is: variance etc.}
 
 %Intuitively, this choice can be motivated by a pool of $M$ information particles. Each particle, which can be interpreted as representing a piece of information, has either a positive or negative effect on $Y$. The total sum (integral) of these particles determines the final value of $Y$. Each forecaster, however, observes only the sum of some subset of the particles. Based on this sum, the forecaster makes an estimate of $Y$. 
 %If
@@ -542,10 +567,17 @@ the revealed aggregator achieves large performance improvements over the common 
 % \vspace{-0.2em} \subsection{Future Research}  \vspace{-0.2em}
  \vspace{0.5em}
 \noindent
-\textbf{2.2. FUTURE RESEARCH:}
- Our work proposes an alternative to one of the core concepts in statistics, namely measurement error. 
+\textbf{2.2. CURRENT AND FUTURE RESEARCH:}
+ Given that my dissertation proposes an alternative to a core statistical concept, namely measurement error, it 
 %Given that measurement error is one of the core concepts in statistics, an enormous amount of research derives from it. Information diversity is a natural yet fundamentally different alternative to it.
-Given the fundamental nature of this innovation, the partial information framework offers much future research, involving both theoretical and applied projects. The following enumeration only lists some of the more natural next steps:
+ leads to a new modeling paradigm that is fundamentally different
+% yet in many applications more appropriate than
+from classical statistics. 
+% hence 
+%Given the fundamental nature of this innovation, the partial information framework
+This leads to a range of theoretical and applied projects in statistics and other related fields. 
+% much future research, involving both theoretical and applied projects. 
+ The following illustrates some specific projects:
 
 % \vspace{0.5em}
 %\noindent
@@ -565,21 +597,27 @@ Given the fundamental nature of this innovation, the partial information framewo
 %c)  The partial information framework can be also applied to forecasts made by different models. This suggests many contributions in machine learning. For instance, semi-supervised learning refers to setups with a large amount of data of which only a relatively few have been labeled. Many of the commonly used ensemble techniques, such as stacking or Bayesian averaging, however, require labeled observations to combine the individual models' predictions. In the contrary, the partial information framework can aggregate predictions without labeled data. This suggests an opportunity for better aggregation and hence overall improved prediction accuracy.
 
 
-
 \begin{enumerate}[i)]
-\item \cite{satopaa2015partial} apply the Gaussian model in a setup where the forecasters participate in separate yet similar prediction problems. In the most extreme case, however, only a set of forecasts of a single unknown outcome are available. How should the forecasts be aggregated in such a low-data setting?
+\itemsep-0.3em 
+\item
+% \cite{satopaa2015partial} apply the Gaussian model in a setup where the forecasters participate in separate yet similar prediction problems. In the most extreme case, however, only a set of forecasts of a single unknown outcome are available. How should the forecasts be aggregated in such a low-data setting?
 % \cite{satopaa2015combining} suggest that any type of weighted average (or some other measure of central tendency) is a poor choice. 
 %A better alternative was discussed by \cite{satopaamodeling}. They assume that $\bSigma_X$ is compound symmetric and then combine the forecasts with the revealed aggregator under the corresponding Gaussian partial information model. 
- Developing a partial information aggregator that can be directly applied to a single set of forecasts is certainly a future research direction with potential for high impact. One idea is to first derive the aggregator based on the Gaussian model and then integrate out any unknown parameters with respect to their posterior distribution. Currently, we have
+ Developing a partial information aggregator for a set of forecasts of a single outcome is a future research direction with potential for high impact. One idea is to first derive the aggregator based on the Gaussian model and then integrate out any unknown parameters with respect to their posterior distribution. Currently, we have
 work in progress analyzing such \textit{Bayes-Gaussian aggregators} but much more work is needed \citep{ernst2015, satopaaBayesGaussian}. 
  
+
  %The first step is to develop an aggregator that is both marginally consistent and expanding. Finding an aggregator that maintains forecasters' reliability seems more difficult. 
 
 %\item A promising empirical direction is the Bayesian approach. These techniques have been found superior to the likelihood-based alternatives in many applications with small or moderately sized datasets. Therefore, given that the number of forecasts in a prediction poll is typically quite small, a Bayesian approach is likely to improve the quality of the final aggregate. This would involve  developing a prior distribution for $\bSigma_{X}$ -- a problem that seems interesting in itself because of the semidefinite constraints that  (\ref{cov_str}) places on $\bSigma_{X}$ \citep{satopaa2015partial}.  
+\item Information diversity is not only relevant in estimation but also offers new directions in other areas of statistics. For instance, some of our current work explores information diversity in testing hypotheses about a binary outcome \citep{satopaaTesting}. The hope is to eventually extend this project to tests of multiple hypotheses with information overlap. 
 
-\item Most probability aggregation procedures use one probability estimate per forecaster, even though it is common for experts studying real problems to update their probability estimates over time. \cite{satopaa2014probability} advance into unexplored areas of probability aggregation by considering a dynamic context in which experts can update their beliefs at random intervals. Overall, this paper was very well received. The aggregator therein, however, is based on measurement error. Therefore, an interesting future project would be to utilize martingale theory and develop a time-series aggregator based on partial information. 
+\item Most aggregation procedures use one estimate per forecaster, even though it is common for experts to update their beliefs over time. 
+%\cite{satopaa2014probability} advance into unexplored areas of probability aggregation by considering a dynamic context in which experts can update their beliefs at random intervals. Overall, this paper was very well received. The aggregator therein, however, is based on measurement error. Therefore, 
+Therefore an interesting future project is to utilize martingale theory and develop a time-series aggregator based on partial information. 
 
-\item The partial information framework can be also applied to forecasts made by different models. This suggests many contributions in machine learning. For instance, semi-supervised learning refers to setups with a large amount of data of which only a relatively few have been labeled. Many of the commonly used ensemble techniques, such as stacking or Bayesian averaging, however, require labeled observations to combine the individual models' predictions. In the contrary, the partial information framework can aggregate predictions without labeled data. This suggests an opportunity for better aggregation and hence overall improved prediction accuracy.
+\item Information diversity can be also applied to model predictions. This suggests many contributions in machine learning. For instance, semi-supervised learning refers to setups with a large amount of data of which only a relatively few have been labeled. While the commonly used ensemble techniques, such as stacking or Bayesian averaging, require labeled observations to combine the individual models' predictions, the partial information framework can aggregate predictions without labeled data. This suggests an opportunity for improved aggregation efficiency.
+% and hence overall improved prediction accuracy.
 
 \end{enumerate}
 
@@ -601,14 +639,14 @@ work in progress analyzing such \textit{Bayes-Gaussian aggregators} but much mor
 %is hosted by the U.S. Department of Health \& Human Services (HHS) with the goal of helping patients to make informed decisions about health care.
  \vspace{0.5em}
 \noindent
-\textbf{3. PUBLIC REPORTING OF HOSPITAL MORTALITY RATES:} 
-Medicare's Hospital Compare is a patient-oriented website
+\textbf{3. PUBLIC REPORTING OF HOSPITAL QUALITY:} 
+Medicare's Hospital Compare is a website
 %\footnote{Visit \url{http://www.medicare.gov/hospitalcompare} for more information}
- where patients can select multiple hospitals and compare their performance related to heart attack, heart failure, pneumonia, surgery, and other conditions. Unfortunately, \cite{silber2010hospital} showed that the model used by Hospital Compare significantly under-estimates the mortality rates at hospitals that treat a small number of patients per year. For example, for acute myocardial infarction (AMI) mortality in 2008, of 4,311 U.S. hospitals, the Hospital Compare model asserted that none were worse than average and nine were better than average. This is a very surprising result because some of these hospitals treat only a few AMI cases per year, while others treat several cases each week. The medical literature \citep{gandjour2003threshold, luft1987volume} has consistently indicated that after adjusting for patient risk factors, there is a higher risk of death at a low-volume hospital. Therefore, sound \textit{general advice} would
-be to avoid low volume hospitals for treatment of AMI. Even though this relationship is clear in the data used by Hospital Compare, they fail to report any such pattern. 
+ where patients can select multiple hospitals and compare their performance related to heart attack, pneumonia, and other conditions. For acute myocardial infarction (AMI) mortality in 2008, of 4,311 U.S. hospitals, the Hospital Compare model asserted that none were worse than average and nine were better than average. This is a very surprising result because some of these hospitals treat only a few AMI cases per year, while others treat several cases each week. The medical literature \citep{luft1987volume, gandjour2003threshold} has consistently indicated that after adjusting for patient risk factors, there is a higher risk of death at a low-volume hospital. Therefore, sound \textit{general advice} would
+be to avoid low volume hospitals. Even though this relationship is clear in the data used by Hospital Compare, they fail to report any such pattern. 
 
-This failure is due to Hospital Compare's efforts to stabilize the estimated mortality rates of low-volume hospitals by shrinking them towards the U.S. national average. During my doctoral studies I have worked in close collaboration with the Center for Outcomes Research at the Children's Hospital of Philadelphia to correct this shortcoming. 
-Even though our work is about methodology, it aims to call a shift in the policy paradigm for public reporting, to a more patient-centered, Bayesian perspective \citep{publicReporting, publicReporting2}.  More specifically, it considers models that more appropriately assume low-volume hospitals to be similar to other low-volume hospitals and hence stabilize their estimates by shrinking them towards the average of hospitals with similar volume and facilities.
+This failure is due to Hospital Compare's efforts to stabilize the estimated mortality rates of low-volume hospitals by shrinking them towards the U.S. national average. During my doctoral studies I have collaborated closely with the Center for Outcomes Research at the Children's Hospital of Philadelphia to correct this shortcoming. 
+Even though our work is about methodology, it aims to shift the policy paradigm for public reporting, to a more patient-centered, Bayesian perspective \citep{publicReporting, publicReporting2}.  More specifically, our models assume low-volume hospitals to be similar to other low-volume hospitals and hence stabilize their estimates by shrinking them towards the average of hospitals with similar volume and facilities.
 %
 % Hospital Compare, however, assumes no relationship between volume and mortality. 
 %%This is an unreasonable assumption given that the literature suggest that mortality rates tend to be higher at low-volume hospitals (see, e.g., \cite{tu2001relationship, halm2002volume}). 
@@ -626,9 +664,11 @@ Even though our work is about methodology, it aims to call a shift in the policy
 %This year our work has focused on modeling AMI mortality rates. Our models improve upon Hospital Compare by shrinking mortality rates slightly towards the average of hospitals with similar volume and facilities. 
  The models form a hierarchy where each subsequent model is more flexible than the previous one and has the choice of reverting back to the Hospital Compare model if the empirical data finds this appropriate. 
 %We have developed a hierarchy of models that build on top of the Hospital Compare model. Each subsequent model incorporates hospital volume and is more flexible than the previous one. It is important to note that all of our models have the choice of reverting back to the Hospital Compare model if the empirical data finds this appropriate.
- None, however, do so. Instead they find a clear volume-outcome relationship where both performance and the accuracy to estimate it improve as volume increases. 
+ None, however, do so. Instead they find a clear volume-outcome relationship and no longer contradict general advice. 
+%  where both performance and the accuracy to estimate it improve as volume increases. 
 % the higher-volume hospitals having a lower mortality rate with higher estimation certainty. 
-Our AMI mortality data, which are a very careful imitation of Medicare's data and consist of about 340,000 patients distributed across about 4,300 hospitals, support all of our models much more than the Hospital Compare model. In particular, our models no longer contradict general advice. 
+Our AMI mortality data, which are a very careful imitation of Medicare's data and consist of about 340,000 patients distributed across about 4,300 hospitals, support all of our models much more than the Hospital Compare model.
+% In particular, our models no longer contradict general advice. 
 
 %With this form of careful model development, strong empirical evidence, and 
 
@@ -686,12 +726,14 @@ Our AMI mortality data, which are a very careful imitation of Medicare's data an
 %The key output of our model is an estimated \textit{posterior distribution} of the mortality rate at a given hospital. This is a statistical quantity that can be difficult to understand by patients who are not familiar with the statistics literature. For this reason, we are using  web-based questionnaires (MTurk) and experiments at the Wharton Behavioral Lab to detect a presentation format that is less likely to be misinterpreted and, hence, less likely to lead to incorrect hospital selection. The final product of our research will be a new publicly available website that presents accurate performance measures in a user-friendly format. The website will enable patients to type in their personal information (age, sex, and any medical history) and compare performance estimates that are personalized and hence more relevant to them. 
 
 
-% \vspace{-1em} \subsection{Future Research} \vspace{-0.2em}
- \vspace{0.5em}
-\noindent
-\textbf{3.1. FUTURE RESEARCH:} The largely unprincipled modeling practice in public reporting offers many research opportunities. 
-%For instance, we have found serious shortcomings in the models used for ranking liver transplantation centers.  
-Even though our work corrects some of the common misconceptions and lays down foundations upon which more principled public reporting can be developed, much work remains to be done. One direction is 
+%% \vspace{-1em} \subsection{Future Research} \vspace{-0.2em}
+% \vspace{0.5em}
+%\noindent
+%\textbf{3.1. FUTURE RESEARCH:} The largely unprincipled modeling practice in public reporting offers many research opportunities. 
+%%For instance, we have found serious shortcomings in the models used for ranking liver transplantation centers.  
+%Even though our work corrects some of the common misconceptions and lays down foundations upon which more principled public reporting can be developed, much work remains to be done.
+%Our future work involves
+In terms of future work, we plan to 
 %to repeat our study of AMI on heart failure and pneumonia, for which we already have close imitations of Medicare's data. 
 %have data that closely imitate that of Medicare's. 
 % In particular, 
@@ -699,9 +741,13 @@ Even though our work corrects some of the common misconceptions and lays down fo
 %\begin{enumerate}[i)]
 %\item 
 %Another interesting avenue is 
-to explore interactions between hospital and patient characteristics. For instance, 
+explore interactions between hospital and patient characteristics. 
+%For instance, 
 %Second, our current models mostly separate patient and hospital characteristics. However, 
-letting the slope coefficients of the patient characteristics to change, say, linearly in the hospital characteristics, would help in explaining what kind of hospitals are good at treating what kind of patients. Such a model could form the basis of a new publicly available website that enables patients to type in their personal information and compare performance estimates that are personalized and hence more relevant to them. 
+%letting the slope coefficients of the patient characteristics to change, say, linearly in the hospital characteristics, 
+Such a model would a) indicate for each hospital the type of patients it treats particularly well  
+% what kind of hospitals are good at treating what kind of patients
+  and b) form the basis of a new publicly available website where patients can type in their personal information and compare performance estimates that are personalized and hence more relevant to them. 
 
 
 
@@ -722,17 +768,18 @@ letting the slope coefficients of the patient characteristics to change, say, li
 %\section{Conclusion: Other Research Directions} 
 \textbf{4. CONCLUSION AND OTHER RESEARCH DIRECTIONS: }
 My research interests are not limited to these two projects, but also span many other areas. For one,
-I believe data collection in judgmental forecasting can be greatly improved by interactive elicitation of judgements.
-Also, given my background in computer science, I am broadly interested
+%I believe data collection in judgmental forecasting can be greatly improved by interactive elicitation of judgements.
+%Also,
+ given my background in computer science, I am broadly interested
 in machine learning, computational statistics, and, in particular, the many scalability issues that classical statistical procedures
-are facing in today’s “big data” boom. All in all, I enjoy working with subject-matter experts, always
+are facing in today’s “big data” boom. All in all, however, I enjoy working with subject-matter experts, always
 look forward to forming new collaborations, and consider dirty real-world data not as a hindrance
 to my research but rather as an opportunity to learn and develop new methodologies.
 
 
 
 
-
+\marginpar{make sure all references look the same; some are misc and some are journals}
 
 
 %\marginpar{Generally interesting in forecasting. and always looking for new collaborations. insights in forecasting. active sampling to boost predictive performance. }
