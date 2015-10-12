@@ -217,7 +217,7 @@ THE WHARTON SCHOOL OF THE UNIVERSITY OF PENNSYLVANIA
 %This motivated
 %This prompted the initiation of a government funded research group called the Good Judgment Project (GJP) (\citealt{ungar2012good}). During its four years of operation, the GJP recruited thousands of forecasters who gave hundreds of thousands of probability estimates about hundreds of future events. 
 %Given that these events were chosen by the Intelligence Advanced Research Projects Activity (IARPA), one of the core research objectives was to investigate how prediction polls can improve national security decision-making. This task is challenging because
- Typically it is not possible to determine ex-ante which forecaster will be the most accurate, and even if this could be done, heeding only the most accurate forecaster's advice would ignore a potentially large amount of relevant information that is being contributed by the rest of the forecasters. Therefore a better alternative is to combine the
+ Typically it is not possible to determine ex-ante which forecaster will be the most accurate, and even if this could be done, heeding only the most accurate forecaster's advice would ignore a potentially large amount of relevant information that is being contributed by the rest of the forecasters. Therefore a better alternative is to aggregate the
 predictions into a single consensus that represents as much of the forecasters' combined information as possible.
 % the forecasters' advice. 
 
@@ -250,32 +250,40 @@ In particular, it is necessary to specify how the forecasts differ from the true
 %Consequently, measurement-error-based aggregators, such as the average, median, and other measures of central tendency, have poor performance  \citep{satopaa, satopaa2014probability}. 
 %In particular,
 %even though forecast aggregation literature by and large agrees that the goal is to collect and combine information from different forecasters (see, e.g., \citealt{armstrong2}),
-More importantly, however, measurement-error-based aggregators, such as the average, median, and other measures of central tendency, do not capture the forecasters' combined information \citep{satopaa2015combining}. To illustrate, consider two forecasters who use independent sets of evidence to estimate the probability of some future event. 
-% to be $0.9$ 
-%but based on independent evidence.
-% yet both estimate the probability of some future event to be $0.9$. 
-%Suppose that they have access to different sets of information. More specifically, 
-That is, in reference to Figure \ref{InfoStr},  
-%Their  information sets are shown in Figure \ref{InfoStr} that represents full information with the unit interval.
-%. In this diagram full information is represented by the unit interval. 
-%Forecaster 1 knows $U \cup M$ while forecaster 2 knows $M \cup V$. Ideally, an aggregator would utilize the forecasters' combined information, namely $U \cup M \cup V$.
-%To illustrate, consider two forecasters, each of whom independently reports a probability estimate of $0.9$ for the occurrence of some future event. Figure \ref{InfoStr} represents full information with the unit interval.
-% and describes the forecasters' private information as subsets of the unit interval. 
-%These forecasters'  information sets are shown in Figure \ref{InfoStr}. In this diagram full information is represented by the unit interval.
-they use respective sets $U$ and $M$ that are disjoint subsets of all information about the future event. 
+More importantly, however, measurement-error-based aggregators, such as the average, median, and other measures of central tendency, do not capture the forecasters' combined information \citep{satopaa2015combining}. To illustrate, consider two forecasters who 
+%use independent sets of information to
+ estimate the probability of some future event. 
+%Their information layout is shown in :
+%  the information that two forecasters use in their estimated the probability of some future event. As is illustrated in Figure \ref{InfoStr}, 
+Suppose they use disjoint subsets, $U$ and $M$, of all information about the  event. This layout is shown in Figure \ref{InfoStr}.
+% Figure \ref{InfoStr} illustrates the information that each forecaster uses: 
+% with disjoint sets of information as illustrated in Figure \ref{InfoStr}. 
+%two forecasters who use independent sets of evidence to estimate the probability of some future event. 
+%% to be $0.9$ 
+%%but based on independent evidence.
+%% yet both estimate the probability of some future event to be $0.9$. 
+%%Suppose that they have access to different sets of information. More specifically, 
+%That is, in reference to Figure \ref{InfoStr},  
+%%Their  information sets are shown in Figure \ref{InfoStr} that represents full information with the unit interval.
+%%. In this diagram full information is represented by the unit interval. 
+%%Forecaster 1 knows $U \cup M$ while forecaster 2 knows $M \cup V$. Ideally, an aggregator would utilize the forecasters' combined information, namely $U \cup M \cup V$.
+%%To illustrate, consider two forecasters, each of whom independently reports a probability estimate of $0.9$ for the occurrence of some future event. Figure \ref{InfoStr} represents full information with the unit interval.
+%% and describes the forecasters' private information as subsets of the unit interval. 
+%%These forecasters'  information sets are shown in Figure \ref{InfoStr}. In this diagram full information is represented by the unit interval.
+%they use respective sets $U$ and $M$ that are disjoint subsets of all information about the future event. 
 %forecaster $1$ uses information in $U$ while forecaster $2$ uses information in $M$ and 
 %the forecasters use respective information sets $U$ and $M$ with
 % $U \cap M = \emptyset$.
 % while forecaster 2 uses information in  $M$.
 %estimates are based on the partial information sets $U \cup M$ and $M \cup V$, respectively. 
-If both forecasters predict $0.9$, 
+Now, if both forecasters predict $0.9$, 
 %
 %Ideally, an aggregator would utilize the forecasters' combined information, namely $U \cup M \cup V$.
 %
 %
 % each of whom independently reports a probability estimate of $0.9$ for the occurrence of some future event. If these forecasters see different evidence, 
 % 
- then clearly the combined information $U \cup M$ should give an aggregate forecast somewhat greater than $0.9$. In this simple scenario, however, all measures of central tendency aggregate to $0.9$. Therefore they fail to account for the  information heterogeneity among the forecasters.  Instead, they assume all forecasters to use the same information and explain any remaining variation with measurement error. 
+ then clearly their combined information $U \cup M$ should give an aggregate forecast somewhat greater than $0.9$. In this simple scenario, however, all measures of central tendency aggregate to $0.9$. Therefore they fail to account for the  information heterogeneity among the forecasters.  Instead, they assume all forecasters to use the same information and explain any remaining variation with measurement error. 
  This under-estimates the amount of combined information
 % , produces aggregates that are under-confident, 
  and leads to poor out-of-sample performance  \citep{satopaa, satopaa2014probability}. 
@@ -332,21 +340,27 @@ If both forecasters predict $0.9$,
 %insight beyond the amount of extremizing itself, and hence lack a clear direction of continued improvement.
 %In a series of three papers \citep{satopaa2015combining, satopaamodeling, satopaa2015partial}, 
 %In response to this need, 
-In response. my dissertation proposes and formalizes \textit{information diversity} as an alternative source of forecast heterogeneity.
+%Clearly, there is a need for a new source of forecast heterogeneity. In response, m
 
-
-for the past three years I have collaborated with a government funded research group called the Good Judgment Project (\citealt{ungar2012good}) and used their large forecasting database to test hypotheses and develop an alternative source of forecast heterogeneity. In particular, my dissertation formalizes and proposes \textit{information diversity} as an alternative to measurement error.
-%For instance, forecasters studying the same (or different) articles about a company may use separate parts of the information and hence report differing predictions on the company's future revenue.
+In response to these shortcomings, I have collaborated closely with a government funded research group called the Good Judgment Project (\citealt{ungar2012good}) and used their large forecasting database to understand the main drivers of forecast heterogeneity.
+%develop a more appropriate source of heterogeneity. 
+%evaluate the appropriateness of information diversity.
+As a result, my dissertation proposes and formalizes \textit{information diversity} as an alternative to measurement error. 
+%source of forecast heterogeneity. 
+For instance, forecasters studying the same (or different) articles about a company may use separate parts of the information and hence report differing predictions on the company's future revenue. 
+%This theory has been tested in close collaboration with 
+ %for the past three years I have collaborated with a government funded research group called the Good Judgment Project (\citealt{ungar2012good}) and used their large forecasting database to develop a more appropriate source of forecast heterogeneity. In particular, my dissertation formalizes and proposes \textit{information diversity} as an alternative to measurement error.
 %modeling framework, called the \textit{partial information framework}, that is based on an alternative source of heterogeneity. 
 This forms the basis of a novel modeling framework, called the \textit{partial information framework}, that is more plausible on the micro-level
-than any other framework has been to date. The framework is not only extremely general but also provides aggregators that collect information from the forecasters.
+than any other framework has been to date. 
+The framework is not only extremely general but also provides aggregators that provably collect information from the forecasters.
 %, and c.
 %
 % can be used to construct aggregators that collect information from the forecasters across a broad class of prediction problems. 
 %The framework is not only more plausible on the micro-level
 %than any other framework has been to date but also provides aggregators that collect information from the forecasters. 
 %This framework has been discussed in a series of three papers \citep{satopaa2015combining, satopaamodeling, satopaa2015partial}. Overall, we have had extremely positive feedback from leaders in the field. 
- A part of this work is described below.
+% A part of this work is described below.
 %forecast heterogeneity, called \textit{information diversity}, that serves as an alternative to measurement error. 
 
 
@@ -611,7 +625,7 @@ work in progress analyzing such \textit{Bayes-Gaussian aggregators} but much mor
  %The first step is to develop an aggregator that is both marginally consistent and expanding. Finding an aggregator that maintains forecasters' reliability seems more difficult. 
 
 %\item A promising empirical direction is the Bayesian approach. These techniques have been found superior to the likelihood-based alternatives in many applications with small or moderately sized datasets. Therefore, given that the number of forecasts in a prediction poll is typically quite small, a Bayesian approach is likely to improve the quality of the final aggregate. This would involve  developing a prior distribution for $\bSigma_{X}$ -- a problem that seems interesting in itself because of the semidefinite constraints that  (\ref{cov_str}) places on $\bSigma_{X}$ \citep{satopaa2015partial}.  
-\item Information diversity is not only relevant in estimation but also offers new directions in other areas of statistics. For instance, some of our current work explores information diversity in testing hypotheses about a binary outcome \citep{satopaaTesting}. The hope is to eventually extend this work to simultaneous testing of multiple informationally overlapping hypotheses.
+\item Information diversity is not only relevant in statistical estimation but also offers new directions in other areas of statistics. For instance, some of our current work applies information diversity to testing hypotheses about a binary outcome \citep{satopaaTesting}. The hope is to eventually extend this work to simultaneous testing of multiple informationally overlapping hypotheses.
 
 \item Most aggregation procedures use one estimate per forecaster, even though it is common for experts to update their beliefs over time. 
 %\cite{satopaa2014probability} advance into unexplored areas of probability aggregation by considering a dynamic context in which experts can update their beliefs at random intervals. Overall, this paper was very well received. The aggregator therein, however, is based on measurement error. Therefore, 
@@ -647,7 +661,7 @@ Medicare's Hospital Compare is a website
 be to avoid low volume hospitals. Even though this relationship is clear in the data used by Hospital Compare, they fail to report any such pattern. 
 
 This failure is due to Hospital Compare's efforts to stabilize the estimated mortality rates of low-volume hospitals by shrinking them towards the U.S. national average. During my doctoral studies I have collaborated closely with the Center for Outcomes Research at the Children's Hospital of Philadelphia to correct this shortcoming. 
-Even though our work is about methodology, it aims to shift the policy paradigm for public reporting, to a more patient-centered, Bayesian perspective \citep{publicReporting, publicReporting2}.  More specifically, our models assume low-volume hospitals to be similar to other low-volume hospitals and hence stabilize their estimates by shrinking them towards the average of hospitals with similar volume and facilities.
+Even though our work is about methodology, it aims to shift the policy paradigm for public reporting to a more patient-centered, Bayesian perspective \citep{publicReporting, publicReporting2}.  More specifically, our models assume low-volume hospitals to be similar to other low-volume hospitals and hence stabilize their estimates by shrinking them towards the average of hospitals with similar volume and facilities.
 %
 % Hospital Compare, however, assumes no relationship between volume and mortality. 
 %%This is an unreasonable assumption given that the literature suggest that mortality rates tend to be higher at low-volume hospitals (see, e.g., \cite{tu2001relationship, halm2002volume}). 
@@ -776,7 +790,7 @@ My research interests are not limited to these two projects, but also span many 
 %Also,
  given my background in computer science, I am broadly interested
 in machine learning, computational statistics, and, in particular, the many scalability issues that classical statistical procedures
-are facing in today’s “big data” boom. All in all, however, I enjoy working with subject-matter experts, always
+are facing in today’s “big data” boom. All in all,  I enjoy working with subject-matter experts, always
 look forward to forming new collaborations, and consider dirty real-world data not as a hindrance
 to my research but rather as an opportunity to learn and develop new methodologies.
 
