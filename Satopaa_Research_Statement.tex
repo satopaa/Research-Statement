@@ -192,7 +192,7 @@ THE WHARTON SCHOOL OF THE UNIVERSITY OF PENNSYLVANIA
 %\subsection*{Motivation} \vspace{-0.2em}
  \vspace{0.5em}
 \noindent
-\textbf{2. MODELING AND AGGREGATING PREDICTIONS:}  Modern social and computer networks have popularized \textit{prediction polling} -- a new type of polling in which multiple
+\textbf{2. MODELING AND AGGREGATING PREDICTIONS:}  Modern social and computer networks have popularized \textit{prediction polling} -- a type of polling in which multiple
 % modern social and computer networks have permitted collection of predictions from multi
 %Prediction polling is a new type of polling in which 
 %Past literature has distinguished two types of polling: prediction and opinion polling. In broad terms, an opinion poll is a survey of public opinion, whereas a prediction poll involves
@@ -217,7 +217,7 @@ THE WHARTON SCHOOL OF THE UNIVERSITY OF PENNSYLVANIA
 %This motivated
 %This prompted the initiation of a government funded research group called the Good Judgment Project (GJP) (\citealt{ungar2012good}). During its four years of operation, the GJP recruited thousands of forecasters who gave hundreds of thousands of probability estimates about hundreds of future events. 
 %Given that these events were chosen by the Intelligence Advanced Research Projects Activity (IARPA), one of the core research objectives was to investigate how prediction polls can improve national security decision-making. This task is challenging because
- Typically it is not possible to determine ex-ante which forecaster will be the most accurate, and even if this could be done, heeding only the most accurate forecaster's advice would ignore a potentially large amount of relevant information that is being contributed by the rest of the forecasters. Therefore a better alternative is to aggregate the
+ Typically it is not possible to determine ex-ante which forecaster will be the most accurate, and even if this could be done, heeding only the most accurate forecaster's advice would ignore a potentially large amount of information that is being contributed by the rest of the forecasters. Therefore a better alternative is to aggregate the
 predictions into a single consensus that represents as much of the forecasters' combined information as possible.
 % the forecasters' advice. 
 
@@ -240,8 +240,9 @@ predictions into a single consensus that represents as much of the forecasters' 
 % This problem, known as the \textit{aggregation problem}, has historically troubled researchers in many fields, including economics \citep{blix2001good},  weather forecasting \citep{raftery2005using}, political science \citep{graefea2014combining}, and others. 
  In general, principled aggregation requires an assumption about the source of heterogeneity among the predictions.
 In particular, it is necessary to specify how the forecasts differ from the true value of the target quantity.
- For the past several decades, potentially due to the early forms of data collection, \textit{measurement error} has been considered as the main source of heterogeneity. This approach has become the standard and is often applied in practice even when data variation is dominated  by causes besides error in measurement. 
- For instance, assuming measurement error may be reasonable in modeling repeated estimates from a single instrument. However, it is unlikely to hold in prediction polling, where estimates arise from multiple, often widely different sources.
+ For the past several decades, potentially due to the early forms of data collection, \textit{measurement error} has been considered as the main source of heterogeneity. This approach has become the standard and is often applied in practice even when data variation is dominated  by other causes.
+%  besides error in measurement. 
+ For instance, measurement error may be reasonable for modeling repeated estimates from a single instrument. However, it is unlikely to hold in prediction polling, where estimates arise from multiple, often widely different sources.
 %  As a result, aggregators based on measurement error are biased and do not collect information. 
 % At best, this forces us to imagine that
 %the forecasters are all in principle trying to apply the same
@@ -255,7 +256,7 @@ More importantly, however, measurement-error-based aggregators, such as the aver
  estimate the probability of some future event. 
 %Their information layout is shown in :
 %  the information that two forecasters use in their estimated the probability of some future event. As is illustrated in Figure \ref{InfoStr}, 
-Suppose they use disjoint subsets, $U$ and $M$, of all information about the  event. This layout is shown in Figure \ref{InfoStr}.
+Suppose they use disjoint subsets, $U$ and $M$, of all information about the future event. See Figure \ref{InfoStr} for their information layout.
 % Figure \ref{InfoStr} illustrates the information that each forecaster uses: 
 % with disjoint sets of information as illustrated in Figure \ref{InfoStr}. 
 %two forecasters who use independent sets of evidence to estimate the probability of some future event. 
@@ -342,7 +343,7 @@ Now, if both forecasters predict $0.9$,
 %In response to this need, 
 %Clearly, there is a need for a new source of forecast heterogeneity. In response, m
 
-In response to these shortcomings, I have collaborated closely with a government funded research group called the Good Judgment Project (\citealt{ungar2012good}) and used their large forecasting database to understand the main drivers of forecast heterogeneity.
+Motivated by these shortcomings, I have collaborated with a government funded research group called the Good Judgment Project (\citealt{ungar2012good}) and used their large forecasting database to understand the main drivers of forecast heterogeneity.
 %develop a more appropriate source of heterogeneity. 
 %evaluate the appropriateness of information diversity.
 As a result, my dissertation proposes and formalizes \textit{information diversity} as an alternative to measurement error. 
@@ -353,7 +354,8 @@ For instance, forecasters studying the same (or different) articles about a comp
 %modeling framework, called the \textit{partial information framework}, that is based on an alternative source of heterogeneity. 
 This forms the basis of a novel modeling framework, called the \textit{partial information framework}, that is more plausible on the micro-level
 than any other framework has been to date. 
-The framework is not only extremely general but also provides aggregators that provably collect information from the forecasters.
+The framework is not only extremely general but also provides aggregators that provably capture the forecasters' combined information.
+%collect information from the forecasters.
 %, and c.
 %
 % can be used to construct aggregators that collect information from the forecasters across a broad class of prediction problems. 
@@ -369,7 +371,7 @@ The framework is not only extremely general but also provides aggregators that p
 \vspace{-1em}
    \centering
    \includegraphics[width = \textwidth]{N=2.png} % requires the graphicx package
-  \caption{Illustration of Information Distribution among Two Forecasters.
+  \caption{Illustration of the Information among the Two Forecasters.
 %   The top bar represents all possible information that can be known about $Y$. The bar leveled horizontally with Forecaster $j$ represents the $j$th forecaster's information set.
    }
      \label{InfoStr}
@@ -396,7 +398,7 @@ The framework is not only extremely general but also provides aggregators that p
 %Unfortunately, averaging aggregators do not behave like information aggregators. Instead, they assume that all forecasters use the same information and hence never appear more informed than the most informed individual forecaster \citep{satopaa2015combining}. This dramatically under-estimates the amount of combined information and leads to an under confident aggregate.  On the other hand, by assuming partially overlapping information sets, the partial information framework is able to estimate an aggregate that reflects the forecasters'  combined information.
 %To make this specific, 
 Consider $N$ forecasters and suppose forecaster $j$ predicts $X_j$ for some quantity of interest $Y$. The partial information framework assumes that $Y$ and $X_j$ are measurable random variables under some probability space $(\Omega, \F , \P)$. 
-The $\sigma$-field $\F$ holds all possible information about $Y$. 
+The principal $\sigma$-field $\F$ holds all possible information about $Y$. 
 %Under the partial information framework, the forecasters operate under the same probability model but use different subsets of the full information. In fact, i
 %In any Bayesian setup, with quadratic loss or some other loss function minimized by the conditional expectation, it is more or less tautological that
 %More specifically,
@@ -412,7 +414,7 @@ Forecaster $j$ then predicts $X_j = \E(Y \| \F_j)$, where $\F_j \subseteq \F$ ho
 %%assumptions on the information structure among the forecasters.
 %The covariance structure (\ref{cov_str}) provides leverage for regressing $Y$ on the $X_j$'s without a separate training set of past predictions and known outcomes. The resulting estimator,
 %The main objective of the framework is to aggregate the forecasters' information into a consensus prediction. 
-In practice, however, all details of the forecasters' information are not available to the aggregator. Instead, the forecasters typically reflect their information only through the predictions. Therefore the relevant aggregator under each specific instance of the framework is the \textit{revealed aggregator} $X'' := \E (Y \|
+In practice, however, all details of the forecasters' information are not available to the aggregator. Instead, the forecasters reflect their information only through the predictions. Therefore the relevant aggregator under each specific instance of the framework is the \textit{revealed aggregator} $X'' := \E (Y \|
 \F'')$, where $\F'' := \sigma(X_1, \dots, X_N)$ is the $\sigma$-field generated (or revealed) by the
 $X_j$'s. 
 % If $\E(Y^2) < \infty$, then among all variables measurable with respect to $\F''$, the revealed aggregator minimizes the expected quadratic loss and therefore provides a reasonable upper bound on aggregation efficiency. \cite{satopaa2015combining} show that $X''$ never reduces to a non-trivial weighted average of the forecasts, suggesting that information diversity, as a source of forecast heterogeneity, is fundamentally different from measurement error. 
@@ -532,7 +534,7 @@ $X_j$'s.
 
 %At this level of specificity, the model, while too general to be applied, is almost certainly correct.
 
-Even though the partial information framework, as briefly described above, is intuitively appealing, it is clearly too abstract to be applied in practice. Therefore, if it is to ever become common practice in forecast aggregation, a close yet practical specification within the framework must be introduced and made accessible to practitioners. Fortunately,  \cite{satopaa2015partial} explain that this only requires one additional assumption, namely the choice of a parametric family for the joint distribution of $Y, X_1, \dots, X_N$. 
+Even though the partial information framework, as briefly described above, is intuitively appealing, it is clearly too abstract to be applied in practice. If it is to ever become common practice in forecast aggregation, a close yet practical specification within the framework must be introduced and made accessible to practitioners. Fortunately,  \cite{satopaa2015partial} explain that this only requires one additional assumption, namely the choice of a parametric family for the joint distribution of $Y, X_1, \dots, X_N$. 
 %Different choices lead to different partial information models. 
 % In order to construct a more specific model within the framework, a joint distribution for the model variables $Y, X_1, \dots, X_N$ must be specified.
  They provide both intuitive and technical motivations for using the multivariate Gaussian distribution
@@ -583,7 +585,7 @@ the revealed aggregator achieves large performance improvements over the common 
  \vspace{0.5em}
 \noindent
 \textbf{2.2. CURRENT AND FUTURE RESEARCH:}
-This work proposes an alternative to a core statistical concept, namely measurement error, and
+This work proposes an alternative to a core statistical concept, namely measurement error, and therefore
 %Given that measurement error is one of the core concepts in statistics, an enormous amount of research derives from it. Information diversity is a natural yet fundamentally different alternative to it.
  leads to a new modeling paradigm that is fundamentally different
 % yet in many applications more appropriate than
@@ -611,28 +613,37 @@ This suggests a range of theoretical and applied projects in statistics and othe
 %\noindent
 %c)  The partial information framework can be also applied to forecasts made by different models. This suggests many contributions in machine learning. For instance, semi-supervised learning refers to setups with a large amount of data of which only a relatively few have been labeled. Many of the commonly used ensemble techniques, such as stacking or Bayesian averaging, however, require labeled observations to combine the individual models' predictions. In the contrary, the partial information framework can aggregate predictions without labeled data. This suggests an opportunity for better aggregation and hence overall improved prediction accuracy.
 
-
+\vspace{-0.3em}
 \begin{enumerate}[i)]
 \itemsep-0.3em 
 \item
-% \cite{satopaa2015partial} apply the Gaussian model in a setup where the forecasters participate in separate yet similar prediction problems. In the most extreme case, however, only a set of forecasts of a single unknown outcome are available. How should the forecasts be aggregated in such a low-data setting?
+% \cite{satopaa2015partial} apply 
+So far, the Gaussian model has been applied to forecasters predicting multiple related outcomes. 
+% In the most extreme case, however, only a set of forecasts of a single unknown outcome are available. How should the forecasts be aggregated in such a low-data setting?
 % \cite{satopaa2015combining} suggest that any type of weighted average (or some other measure of central tendency) is a poor choice. 
 %A better alternative was discussed by \cite{satopaamodeling}. They assume that $\bSigma_X$ is compound symmetric and then combine the forecasts with the revealed aggregator under the corresponding Gaussian partial information model. 
- Developing a partial information aggregator for a set of forecasts of a single outcome is a future research direction with potential for high impact. One idea is to first derive the aggregator based on the Gaussian model and then integrate out any unknown parameters with respect to their posterior distribution. Currently, we have
+ Therefore a natural next step is to develop an aggregator for a set of forecasts of a single outcome.
+%  is a natural future direction.
+%  with potential for high impact. 
+  One idea is to first derive the aggregator based on the Gaussian model and then integrate out any unknown parameters with respect to their posterior distribution. Currently, we have
 work in progress analyzing such \textit{Bayes-Gaussian aggregators} but much more work is needed \citep{ernst2015, satopaaBayesGaussian}. 
  
+% \marginpar{Mention that previously used multiple problems...}
 
  %The first step is to develop an aggregator that is both marginally consistent and expanding. Finding an aggregator that maintains forecasters' reliability seems more difficult. 
 
 %\item A promising empirical direction is the Bayesian approach. These techniques have been found superior to the likelihood-based alternatives in many applications with small or moderately sized datasets. Therefore, given that the number of forecasts in a prediction poll is typically quite small, a Bayesian approach is likely to improve the quality of the final aggregate. This would involve  developing a prior distribution for $\bSigma_{X}$ -- a problem that seems interesting in itself because of the semidefinite constraints that  (\ref{cov_str}) places on $\bSigma_{X}$ \citep{satopaa2015partial}.  
-\item Information diversity is not only relevant in statistical estimation but also offers new directions in other areas of statistics. For instance, some of our current work applies information diversity to testing hypotheses about a binary outcome \citep{satopaaTesting}. The hope is to eventually extend this work to simultaneous testing of multiple informationally overlapping hypotheses.
+\item Information diversity is not only relevant in statistical estimation but also offers new directions in other areas of statistics. For instance, some of our current work applies information diversity to testing hypotheses about a binary outcome \citep{satopaaTesting}. Such procedures are expected to yield higher power when information diversity is the dominant source of data variation. 
+%Eventually we plan to extend this work to simultaneous testing of multiple informationally overlapping hypotheses. 
 
-\item Most aggregation procedures use one estimate per forecaster, even though it is common for experts to update their beliefs over time. 
-%\cite{satopaa2014probability} advance into unexplored areas of probability aggregation by considering a dynamic context in which experts can update their beliefs at random intervals. Overall, this paper was very well received. The aggregator therein, however, is based on measurement error. Therefore, 
-Therefore an interesting future project is to utilize martingale theory and develop a time-series aggregator based on partial information. 
+\item 
+Most aggregation procedures use one estimate per forecaster, even though it is common for experts to update their beliefs over time. 
+\cite{satopaa2014probability} advance into unexplored areas of probability aggregation by considering a dynamic context in which experts can update their beliefs at random intervals. Overall, this paper was very well received. The aggregator therein, however, is based on measurement error. Therefore,  an interesting future project is to utilize martingale theory and develop a time-series aggregator based on partial information. 
 
-\item Information diversity can be also applied to model predictions. This suggests many contributions in machine learning. For instance, semi-supervised learning refers to setups with a large amount of data of which only a relatively few have been labeled. While the commonly used ensemble techniques, such as stacking or Bayesian averaging, require labeled observations to combine the individual models' predictions, the partial information framework can aggregate predictions without labeled data. This suggests an opportunity for improved aggregation efficiency.
-% and hence overall improved prediction accuracy.
+%\marginpar{bring back our old paper; need motivation for this problem.}
+
+
+\item Information diversity can be also applied to model predictions. This suggests many contributions in machine learning. For instance, semi-supervised learning refers to setups with a large amount of data of which only a relatively few have been labeled. While the commonly used ensemble techniques, such as stacking or Bayesian averaging, require labeled observations to combine the individual models' predictions, partial information aggregators do not. This suggests an opportunity for improved aggregation efficiency and hence improved prediction accuracy.
 
 \end{enumerate}
 
