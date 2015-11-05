@@ -240,9 +240,10 @@ predictions into a single consensus that represents as much of the forecasters' 
 % This problem, known as the \textit{aggregation problem}, has historically troubled researchers in many fields, including economics \citep{blix2001good},  weather forecasting \citep{raftery2005using}, political science \citep{graefea2014combining}, and others. 
  In general, principled aggregation requires an assumption about the source of heterogeneity among the predictions.
 In particular, it is necessary to specify how the forecasts differ from the true value of the target quantity.
- For the past several decades, potentially due to the early forms of data collection, \textit{measurement error} has been considered as the main source of heterogeneity. This approach has become the standard and is often applied in practice even when data variation is dominated  by other causes.
+ For the past several decades, potentially due to the early forms of data collection, \textit{measurement error} has been considered as the main source of heterogeneity. 
+% This approach has become the standard and is often applied in practice even when data variation is dominated  by other causes.
 %  besides error in measurement. 
- For instance, measurement error may be reasonable for modeling repeated estimates from a single instrument. However, it is unlikely to hold in prediction polling, where estimates arise from multiple, often widely different sources.
+% For instance, measurement error may be reasonable for modeling repeated estimates from a single instrument. However, it is unlikely to hold in prediction polling, where estimates arise from multiple, often widely different sources.
 %  As a result, aggregators based on measurement error are biased and do not collect information. 
 % At best, this forces us to imagine that
 %the forecasters are all in principle trying to apply the same
@@ -251,12 +252,16 @@ In particular, it is necessary to specify how the forecasts differ from the true
 %Consequently, measurement-error-based aggregators, such as the average, median, and other measures of central tendency, have poor performance  \citep{satopaa, satopaa2014probability}. 
 %In particular,
 %even though forecast aggregation literature by and large agrees that the goal is to collect and combine information from different forecasters (see, e.g., \citealt{armstrong2}),
-More importantly, however, measurement-error-based aggregators, such as the average, median, and other measures of central tendency, do not capture the forecasters' combined information \citep{satopaa2015combining}. To illustrate, consider two forecasters who 
+%More importantly, however,
+Unfortunately, measurement-error-based aggregators, such as the average, median, and other measures of central tendency, do not capture the forecasters' combined information. To illustrate, consider two forecasters who use disjoint information sets to 
 %use independent sets of information to
  estimate the probability of some future event. 
 %Their information layout is shown in :
 %  the information that two forecasters use in their estimated the probability of some future event. As is illustrated in Figure \ref{InfoStr}, 
-Suppose they use disjoint subsets, $U$ and $M$, of all information that can be known about the future event. See Figure \ref{InfoStr} for their information layout.
+%They, however, arrived at these predictions based on different sets of information.
+% In particular, the forecasters use some information sets $U$ and $M$. 
+% , where both $U$ and $M$ support the occurrence of the event.
+  Figure \ref{InfoStr} shows this layout and denotes the forecasters' information sets with $U$ and $M$. Now, suppose that both $U$ and $M$ are in favor of the event and that each forecaster predicts $0.9$. 
 % Figure \ref{InfoStr} illustrates the information that each forecaster uses: 
 % with disjoint sets of information as illustrated in Figure \ref{InfoStr}. 
 %two forecasters who use independent sets of evidence to estimate the probability of some future event. 
@@ -277,23 +282,30 @@ Suppose they use disjoint subsets, $U$ and $M$, of all information that can be k
 % $U \cap M = \emptyset$.
 % while forecaster 2 uses information in  $M$.
 %estimates are based on the partial information sets $U \cup M$ and $M \cup V$, respectively. 
-Now, if both forecasters predict $0.9$, 
+% As a result, both forecasters predict $0.9$. 
+% and both forecasters predict $0.9$, 
 %
 %Ideally, an aggregator would utilize the forecasters' combined information, namely $U \cup M \cup V$.
 %
 %
 % each of whom independently reports a probability estimate of $0.9$ for the occurrence of some future event. If these forecasters see different evidence, 
 % 
- then clearly their combined information $U \cup M$ should give an aggregate forecast somewhat greater than $0.9$. In this simple scenario, however, all measures of central tendency aggregate to $0.9$. Therefore they fail to account for the  information heterogeneity among the forecasters.  Instead, they assume all forecasters to use the same information and explain any remaining variation with measurement error. 
- This under-estimates the amount of combined information
-% , produces aggregates that are under-confident, 
- and leads to poor out-of-sample performance  \citep{satopaa, satopaa2014probability}. 
+Given that the combined information $U \cup M$ would provide even stronger evidence in favor of the event, the optimal aggregate of their forecasts should be somewhat greater than $0.9$. In this simple scenario, however, all measures of central tendency aggregate to $0.9$. Therefore they fail to account for the  information heterogeneity among the forecasters.
+ Instead, they assume all forecasters to use the same information and explain any remaining variation with measurement error. 
+% This unfortunate because these aggregators 
+%and, as a result, do not reflect the forecasters' combined information. 
+Of course, this is only one simple example. Unfortunately, however, the result is general: it holds for any number of univariate forecasts -- even when the predictions are not identical and the forecasters' information sets are not disjoint \citep{satopaa2015combining}.
+% This under-estimates the amount of combined information
+%% , produces aggregates that are under-confident, 
+% and leads to poor out-of-sample performance  \citep{satopaa, satopaa2014probability}. 
 
 %  If they are seeing the same evidence, then the optimal aggregate
 %forecast is $2/3$.  If they are seeing different evidence,
 %then clearly the combined evidence should give an aggregate forecast
 %somewhat greater than $2/3$.  
 
+
+%\marginpar{explain that this is positive information}
 
 % (see, e.g., \citealt{forlines2012heuristics, armstrong2, dawid1995coherent})
 %In fact, \cite{satopaamodeling} provide simple examples showing that optimal aggregation is not well-defined without assumptions on the information structure among the forecasters.
@@ -346,7 +358,7 @@ Now, if both forecasters predict $0.9$,
 Motivated by these shortcomings, I have collaborated with a government funded research group called the Good Judgment Project (\citealt{ungar2012good}) and used their large forecasting database to understand the main drivers of forecast heterogeneity.
 %develop a more appropriate source of heterogeneity. 
 %evaluate the appropriateness of information diversity.
-As a result, my dissertation proposes and formalizes \textit{information diversity} as an alternative to measurement error. 
+As a result, my dissertation proposes and formalizes \textit{information diversity} as an alternative to measurement error \citep{satopaamodeling2, satopaamodeling}.
 %source of forecast heterogeneity. 
 For instance, forecasters studying the same (or different) articles about a company may use separate parts of the information and hence report differing predictions on the company's future revenue. 
 %This theory has been tested in close collaboration with 
@@ -414,10 +426,15 @@ Forecaster $j$ then predicts $X_j = \E(Y \| \F_j)$, where $\F_j \subseteq \F$ ho
 %%assumptions on the information structure among the forecasters.
 %The covariance structure (\ref{cov_str}) provides leverage for regressing $Y$ on the $X_j$'s without a separate training set of past predictions and known outcomes. The resulting estimator,
 %The main objective of the framework is to aggregate the forecasters' information into a consensus prediction. 
-In practice, however, all details of the forecasters' information are not available to the aggregator. Instead, the forecasters reflect their information only through the predictions. Therefore the relevant aggregator under each specific instance of the framework is the \textit{revealed aggregator} $X'' := \E (Y \|
+In practice, however, all details of the forecasters' information are not available to the aggregator. Instead, the forecasters reflect their information only through the predictions. The optimal aggregator within the framework uses all of this revealed information to predict the value of $Y$. More specifically,  the \textit{revealed aggregator} is $X'' := \E (Y \|
 \F'')$, where $\F'' := \sigma(X_1, \dots, X_N)$ is the $\sigma$-field generated (or revealed) by the
-$X_j$'s. 
-% If $\E(Y^2) < \infty$, then among all variables measurable with respect to $\F''$, the revealed aggregator minimizes the expected quadratic loss and therefore provides a reasonable upper bound on aggregation efficiency. \cite{satopaa2015combining} show that $X''$ never reduces to a non-trivial weighted average of the forecasts, suggesting that information diversity, as a source of forecast heterogeneity, is fundamentally different from measurement error. 
+$X_j$'s. This aggregator captures the forecasters' combined information and also 
+% If $\E(Y^2) < \infty$, then among all variables measurable with respect to $\F''$, the revealed aggregator 
+minimizes the expected quadratic loss among all aggregators.
+% Therefore it should be considered as the target for all forecast aggregation practice.
+% of forecast aggregation. 
+%reasonable upper bound on aggregation efficiency. 
+%\cite{satopaa2015combining} show that $X''$ never reduces to a non-trivial weighted average of the forecasts, suggesting that information diversity, as a source of forecast heterogeneity, is fundamentally different from measurement error. 
 
 
 %
@@ -534,10 +551,10 @@ $X_j$'s.
 
 %At this level of specificity, the model, while too general to be applied, is almost certainly correct.
 
-Even though the partial information framework, as briefly described above, is intuitively appealing, it is clearly too abstract to be applied in practice. If it is to ever become common practice in forecast aggregation, a close yet practical specification within the framework must be introduced and made accessible to practitioners. Fortunately,  \cite{satopaa2015partial} show that the general framework poses a specific structure on the first two joint moments of $Y, X_1, \dots, X_N$. Thus, a specification only requires one additional assumption, namely the choice of a parametric family for the joint distribution of these variables. 
+Even though the partial information framework, as briefly described above, is intuitively appealing and very useful for proving theorems, it is clearly too abstract to be applied in practice. If it is to ever become common practice in forecast aggregation, a close yet practical specification within the framework must be introduced and made accessible to practitioners. Fortunately,  \cite{satopaamodeling2} show that the general framework poses a specific structure on the first two joint moments of $Y, X_1, \dots, X_N$. Thus, a specification only requires one additional assumption, namely the choice of a parametric family for the joint distribution of these variables. 
 %Different choices lead to different partial information models. 
 % In order to construct a more specific model within the framework, a joint distribution for the model variables $Y, X_1, \dots, X_N$ must be specified.
-  \cite{satopaa2015partial} provide both intuitive and technical motivations for using the multivariate Gaussian distribution
+  \cite{satopaamodeling2} provide both intuitive and technical motivations for using the multivariate Gaussian distribution
 %  The resulting model, named the \textit{Gaussian partial information model}, has been extremely successful. 
 %  First, \cite{satopaamodeling} use it to provide intuition on when and how much the average forecast should be extremized. Second, \cite{satopaa2015partial} estimate $\bSigma_X$ for forecasters addressing more than one related problems and
 %  
@@ -638,7 +655,8 @@ work in progress analyzing such \textit{Bayes-Gaussian aggregators} but much mor
 
 \item 
 Most aggregation procedures use one estimate per forecaster, even though it is common for experts to update their beliefs over time. 
-Motivated by this, \cite{satopaa2014probability} consider a dynamic context in which experts can update their beliefs at random intervals. Overall, this paper was very well received. The aggregator therein, however, is an empirical procedure that requires a training set of multiple prediction problems with known outcomes. Therefore, an interesting future project is to use martingale theory within the partial information framework and construct a time-series aggregator that can operate directly on the forecasts.
+Motivated by this, \cite{satopaa2014probability} consider a dynamic context in which experts can update their beliefs at random intervals. Overall, this paper was very well received. The aggregator therein, however, is an empirical procedure that requires a training set of multiple prediction problems with known outcomes. Therefore, an interesting future project is to use martingale theory within the partial information framework and construct a time-series aggregator that can operate directly on the forecasts. 
+%Recently, I was approached by a private sector party who expressed high interest in 
 %\marginpar{This actually aims to estimate X'' via extremization. The problem is that it needs multiple problems with known outcomes. We want to have this for a single time-series setup.}
 %\marginpar{bring back our old paper; need motivation for this problem.}
 
