@@ -240,7 +240,7 @@ predictions into a single consensus that represents as much of the forecasters' 
 % This problem, known as the \textit{aggregation problem}, has historically troubled researchers in many fields, including economics \citep{blix2001good},  weather forecasting \citep{raftery2005using}, political science \citep{graefea2014combining}, and others. 
  In general, principled aggregation requires an assumption about the source of heterogeneity among the predictions.
 In particular, it is necessary to specify how the forecasts differ from the true value of the target quantity.
- For the past several decades, potentially due to the early forms of data collection, \textit{measurement error} has been considered as the main source of heterogeneity. 
+ For the past several decades, potentially due to the early forms of data collection, {measurement error} has been considered as the main source of heterogeneity. 
 % This approach has become the standard and is often applied in practice even when data variation is dominated  by other causes.
 %  besides error in measurement. 
 % For instance, measurement error may be reasonable for modeling repeated estimates from a single instrument. However, it is unlikely to hold in prediction polling, where estimates arise from multiple, often widely different sources.
@@ -415,7 +415,7 @@ Here the principal $\sigma$-field $\F$ represents all possible information about
 %In any Bayesian setup, with quadratic loss or some other loss function minimized by the conditional expectation, it is more or less tautological that
 %More specifically,
 %The 
-Forecaster $j$ then predicts $X_j = \E(Y \| \F_j)$, where $\F_j \subseteq \F$ holds the information used in the forecast. That is,  if the forecaster uses a simple rule, $\F_j$ may not be the full $\sigma$-field of information available to the forecaster but rather a smaller $\sigma$-field corresponding to the information actually used by the rule. Therefore $\F_i \neq \F_j$ if $X_i \neq X_j$, and forecast heterogeneity stems purely from information diversity.  
+Forecaster $j$ then predicts $X_j = \E(Y \| \F_j)$, where $\F_j \subseteq \F$ contains the information used in the forecast. That is,  if the forecaster uses a simple rule, $\F_j$ may not be the full $\sigma$-field of information available to the forecaster but rather a smaller $\sigma$-field corresponding to the information actually used by the rule. Therefore $\F_i \neq \F_j$ if $X_i \neq X_j$, and forecast heterogeneity stems purely from information diversity.  
 % Note, however, that if forecaster $j$ uses a simple rule, $\F_j$ may not be the full $\sigma$-field of information available to the forecaster but rather a smaller $\sigma$-field corresponding to the information used by the rule. Furthermore, if two forecasters have access to the same $\sigma$-field, they may decide to use different sub-$\sigma$-fields, leading to different predictions. 
 %%%This is reminiscent of a forecasting algorithm that only uses
 %%%a similarly restricted subset of information. 
@@ -433,7 +433,7 @@ Therefore, the relevant aggregator is the \textit{revealed aggregator} $X'' := \
 \F'')$, where $\F'' := \sigma(X_1, \dots, X_N)$ is the $\sigma$-field generated (or revealed) by the
 $X_j$'s. This aggregator captures the forecasters' combined information and also
 % If $\E(Y^2) < \infty$, then among all variables measurable with respect to $\F''$, the revealed aggregator 
-minimizes the expected quadratic loss among all aggregators.
+minimizes the expected quadratic loss among all possible aggregators.
 % and hence is the relevant aggregator within each specific instance of the framework. 
 % Therefore it should be considered as the target for all forecast aggregation practice.
 % of forecast aggregation. 
