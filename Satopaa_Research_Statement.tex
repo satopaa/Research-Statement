@@ -290,7 +290,7 @@ Unfortunately, measurement-error-based aggregators, such as the average, median,
 %
 % each of whom independently reports a probability estimate of $0.9$ for the occurrence of some future event. If these forecasters see different evidence, 
 % 
-Given that the combined information $U \cup M$ would provide even stronger evidence in favor of the event, the optimal aggregate of their forecasts should be somewhat greater than $0.9$. In this simple scenario, however, all measures of central tendency aggregate to $0.9$. Therefore they fail to account for the  information heterogeneity among the forecasters.
+Given that the combined information $U \cup M$ would provide even stronger evidence in favor of the event, the optimal aggregate of the forecasts should be somewhat greater than $0.9$. In this simple scenario, however, all measures of central tendency aggregate to $0.9$. Therefore they fail to account for the  information heterogeneity among the forecasters.
  Instead, they assume all forecasters to use the same information and explain any remaining variation with measurement error. 
 % This unfortunate because these aggregators 
 %and, as a result, do not reflect the forecasters' combined information. 
@@ -409,13 +409,13 @@ The framework is not only extremely general but also provides aggregators that p
 %%Therefore nobody knows information in $W$. 
 %Unfortunately, averaging aggregators do not behave like information aggregators. Instead, they assume that all forecasters use the same information and hence never appear more informed than the most informed individual forecaster \citep{satopaa2015combining}. This dramatically under-estimates the amount of combined information and leads to an under confident aggregate.  On the other hand, by assuming partially overlapping information sets, the partial information framework is able to estimate an aggregate that reflects the forecasters'  combined information.
 %To make this specific, 
-Consider $N$ forecasters and suppose forecaster $j$ predicts $X_j$ for some quantity of interest $Y$. The partial information framework assumes that $Y$ and $X_j$ are measurable random variables under some probability space $(\Omega, \F , \P)$. 
-The principal $\sigma$-field $\F$ holds all possible information about $Y$. 
+Consider $N$ forecasters predicting the value of some quantity of interest $Y$. The partial information framework assumes that $Y$ is a measurable random variable under some probability space $(\Omega, \F , \P)$. 
+Here the principal $\sigma$-field $\F$ represents all possible information about $Y$. 
 %Under the partial information framework, the forecasters operate under the same probability model but use different subsets of the full information. In fact, i
 %In any Bayesian setup, with quadratic loss or some other loss function minimized by the conditional expectation, it is more or less tautological that
 %More specifically,
 %The 
-Forecaster $j$ then predicts $X_j = \E(Y \| \F_j)$, where $\F_j \subseteq \F$ holds all information used in the forecast. In other words,  if the forecaster uses a simple rule, $\F_j$ may not be the full $\sigma$-field of information available to the forecaster but rather a smaller $\sigma$-field corresponding to the information actually used by the rule. Therefore $\F_i \neq \F_j$ if $X_i \neq X_j$, and forecast heterogeneity stems purely from information diversity.  
+Forecaster $j$ then predicts $X_j = \E(Y \| \F_j)$, where $\F_j \subseteq \F$ holds the information used in the forecast. That is,  if the forecaster uses a simple rule, $\F_j$ may not be the full $\sigma$-field of information available to the forecaster but rather a smaller $\sigma$-field corresponding to the information actually used by the rule. Therefore $\F_i \neq \F_j$ if $X_i \neq X_j$, and forecast heterogeneity stems purely from information diversity.  
 % Note, however, that if forecaster $j$ uses a simple rule, $\F_j$ may not be the full $\sigma$-field of information available to the forecaster but rather a smaller $\sigma$-field corresponding to the information used by the rule. Furthermore, if two forecasters have access to the same $\sigma$-field, they may decide to use different sub-$\sigma$-fields, leading to different predictions. 
 %%%This is reminiscent of a forecasting algorithm that only uses
 %%%a similarly restricted subset of information. 
@@ -426,11 +426,15 @@ Forecaster $j$ then predicts $X_j = \E(Y \| \F_j)$, where $\F_j \subseteq \F$ ho
 %%assumptions on the information structure among the forecasters.
 %The covariance structure (\ref{cov_str}) provides leverage for regressing $Y$ on the $X_j$'s without a separate training set of past predictions and known outcomes. The resulting estimator,
 %The main objective of the framework is to aggregate the forecasters' information into a consensus prediction. 
-In practice, however, all details of the forecasters' information are not available to the aggregator. Instead, the forecasters reflect their information only through the predictions. The optimal aggregator within the framework uses all of this revealed information to predict the value of $Y$. More specifically,  the \textit{revealed aggregator} is $X'' := \E (Y \|
+In practice, however, all the details of the forecasters' information are not available to the aggregator. Instead, information comes to the aggregator only through the forecasts.
+%the forecasters provide information only through their predictions. 
+%The optimal aggregator within the framework uses all of this information to predict the value of $Y$. 
+Therefore, the relevant aggregator is the \textit{revealed aggregator} $X'' := \E (Y \|
 \F'')$, where $\F'' := \sigma(X_1, \dots, X_N)$ is the $\sigma$-field generated (or revealed) by the
-$X_j$'s. This aggregator captures the forecasters' combined information and also 
+$X_j$'s. This aggregator captures the forecasters' combined information and also
 % If $\E(Y^2) < \infty$, then among all variables measurable with respect to $\F''$, the revealed aggregator 
 minimizes the expected quadratic loss among all aggregators.
+% and hence is the relevant aggregator within each specific instance of the framework. 
 % Therefore it should be considered as the target for all forecast aggregation practice.
 % of forecast aggregation. 
 %reasonable upper bound on aggregation efficiency. 
@@ -551,7 +555,7 @@ minimizes the expected quadratic loss among all aggregators.
 
 %At this level of specificity, the model, while too general to be applied, is almost certainly correct.
 
-Even though the partial information framework, as briefly described above, is intuitively appealing and very useful for proving theorems, it is clearly too abstract to be applied in practice. If it is to ever become common practice in forecast aggregation, a close yet practical specification within the framework must be introduced and made accessible to practitioners. Fortunately,  \cite{satopaamodeling2} show that the general framework poses a specific structure on the first two joint moments of $Y, X_1, \dots, X_N$. Thus, a specification only requires one additional assumption, namely the choice of a parametric family for the joint distribution of these variables. 
+Even though the framework, as briefly described above, is intuitively appealing and useful for proving theorems, it is clearly too abstract to be applied in practice. If it is to ever become widely used in forecast aggregation, a close yet practical specification within the framework must be introduced and made accessible to practitioners. Fortunately,  \cite{satopaamodeling2} show that the general framework poses a specific structure on the first two joint moments of $Y, X_1, \dots, X_N$. Thus, a specification only requires one additional assumption, namely the choice of a parametric family for the joint distribution of these variables. 
 %Different choices lead to different partial information models. 
 % In order to construct a more specific model within the framework, a joint distribution for the model variables $Y, X_1, \dots, X_N$ must be specified.
   \cite{satopaamodeling2} provide both intuitive and technical motivations for using the multivariate Gaussian distribution
